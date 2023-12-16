@@ -4,9 +4,6 @@ import { DateTime } from 'luxon'
 import moment from 'moment'
 import Hash from '@ioc:Adonis/Core/Hash'
 import UserService from 'App/Services/User'
-import PackageRestrictionService from 'App/Services/PackageRestriction'
-import ProjectsService from 'App/Services/Projects'
-import { StringToArrayInt } from 'App/Helpers/Utilities'
 
 interface ProjectDetailInterface {
   key_id: number
