@@ -1,11 +1,4 @@
 import type { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import Env from '@ioc:Adonis/Core/Env'
-
-const isDev = Env.get('NODE_ENV', 'production') !== 'production'
-
-type ResponseApiCollectionData = {
-  debug?: {}
-}
 
 export default class AppProvider {
   constructor(protected app: ApplicationContract) {}

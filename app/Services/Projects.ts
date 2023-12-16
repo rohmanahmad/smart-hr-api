@@ -1,7 +1,7 @@
 import uniqByLodash from 'lodash.uniq'
 import sumLodash from 'lodash.sum'
 import { ProjectsAndComparedProjectByUser, ProjectDetail } from 'App/Interfaces'
-import UserModel from 'App/Models/Mysql/RippleUser'
+import UserModel from 'App/Models/Mysql/UserAccounts'
 import KeywordModel from 'App/Models/Mysql/RippleKeyword'
 import KeywordCompareModel from 'App/Models/Mysql/RippleKeywordCompare'
 import { StringToArrayInt, StringToArrayString } from 'App/Helpers/Utilities'

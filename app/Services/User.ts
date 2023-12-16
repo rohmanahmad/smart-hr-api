@@ -1,4 +1,4 @@
-import UserModel from 'App/Models/Mysql/RippleUser'
+import UserModel from 'App/Models/Mysql/UserAccounts'
 
 declare module 'App/Services/User' {
   interface UserInfo {

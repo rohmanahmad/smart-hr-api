@@ -103,7 +103,7 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
-        model: () => import('App/Models/Mysql/RippleUser'),
+        model: () => import('App/Models/Mysql/UserAccounts'),
       },
     },
   },

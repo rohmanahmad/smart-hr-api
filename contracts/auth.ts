@@ -5,7 +5,7 @@
  * file.
  */
 
-import User from 'App/Models/Mysql/RippleUser'
+import User from 'App/Models/Mysql/UserAccounts'
 
 declare module '@ioc:Adonis/Addons/Auth' {
   /*
