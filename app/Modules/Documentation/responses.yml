@@ -1,0 +1,40 @@
+responses:
+  codes:
+    '200':
+      type: number
+      example: 200
+    '400':
+      type: number
+      example: 400
+    '500':
+      type: number
+      example: 500
+
+  messages:
+    'retrieve':
+      type: string
+      example: Data Retrieve
+    '500':
+      type: string
+      example: Internal Server Error
+    '400':
+      type: string
+      example: ERROR_MESSAGE_HERE
+
+  '4xx':
+    type: object
+    properties:
+      status:
+        $ref: '#/responses/codes/400'
+      message:
+        $ref: '#/responses/messages/400'
+  '5xx':
+    type: object
+    properties:
+      status:
+        $ref: '#/responses/codes/500'
+      message:
+        $ref: '#/responses/messages/500'
+      stack:
+        type: array
+        example: []
