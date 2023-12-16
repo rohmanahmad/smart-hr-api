@@ -9,7 +9,7 @@ export default class V1DocumentationUIController {
     try {
       const html = await view.render('documentation::documentation', {
         favicon: 'data:image/png;base64,' + faviconEncode,
-        specUrl: '/api/v3/documentation/r10.json',
+        specUrl: '/api/v1/documentation/spec.json',
       })
       return html
     } catch (err) {
