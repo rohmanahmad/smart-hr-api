@@ -38,6 +38,9 @@ dependencies:
   lodash.uniq:
     specifier: ^4.5.0
     version: 4.5.0
+  luxon:
+    specifier: ^3.4.4
+    version: 3.4.4
   md5:
     specifier: ^2.3.0
     version: 2.3.0
@@ -79,6 +82,9 @@ devDependencies:
   '@types/lodash.uniq':
     specifier: ^4.5.9
     version: 4.5.9
+  '@types/luxon':
+    specifier: ^3.3.7
+    version: 3.3.7
   '@types/md5':
     specifier: ^2.3.5
     version: 2.3.5
