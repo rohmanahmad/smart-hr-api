@@ -71,6 +71,7 @@
     "discord-webhook-node": "^1.1.8",
     "lodash.sum": "^4.0.2",
     "lodash.uniq": "^4.5.0",
+    "md5": "^2.3.0",
     "moment": "^2.29.4",
     "mongoose": "5.13.20",
     "mysql2": "^3.6.1",

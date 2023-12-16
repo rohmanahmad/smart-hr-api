@@ -34,15 +34,4 @@ Route.get('/api/v3', async () => {
 })
 
 import 'App/Modules/Authentication/Routes'
-import 'App/Modules/Authors/Routes'
-import 'App/Modules/BuzzerTracking/Routes'
-import 'App/Modules/CommandCenter/Routes'
 import 'App/Modules/Documentation/Routes'
-import 'App/Modules/HealthIndex/Routes'
-import 'App/Modules/Locations/Routes'
-import 'App/Modules/Ocean/Routes'
-import 'App/Modules/PackageRestriction/Routes'
-import 'App/Modules/Settings/Routes'
-import 'App/Modules/Streams/Routes'
-import 'App/Modules/Trendings/Routes'
-import 'App/Modules/V3Old/Routes'
