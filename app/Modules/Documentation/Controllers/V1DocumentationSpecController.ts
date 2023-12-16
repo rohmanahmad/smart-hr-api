@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import swaggerJSDoc from 'swagger-jsdoc'
-import DocConfig from 'App/Modules/Documentation/Components/configs/v1'
+import DocConfig from 'App/Modules/Documentation/Components/configs/smart-hr'
 
 export default class V1DocumentationUIController {
   public async handle({}: HttpContextContract) {
