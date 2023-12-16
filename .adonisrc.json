@@ -32,7 +32,6 @@
     "./providers/AppProvider",
     "./providers/ExtendResponseProvider",
     "./providers/Hash/MD5Provider",
-    "./providers/Mongodb/Mongoose/MongooseProvider",
     "@adonisjs/auth",
     "@adonisjs/redis",
     "@adonisjs/limiter"
