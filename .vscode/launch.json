@@ -7,14 +7,18 @@
     {
       "name": "Launch Server",
       "request": "launch",
-      "runtimeArgs": [
-        "ace",
-        "serve"
-      ],
+      "runtimeArgs": ["ace", "serve"],
       "runtimeExecutable": "/Users/ivo/.nvm/versions/node/v20.10.0/bin/node",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "outputCapture": "std"
+    },
+    {
+      "name": "Launch Server Vito",
+      "request": "launch",
+      "runtimeArgs": ["ace", "serve"],
+      "runtimeExecutable": "/home/vito/.nvm/versions/node/v20.10.0/bin/node",
+      "skipFiles": ["<node_internals>/**"],
       "type": "node",
       "outputCapture": "std"
     }

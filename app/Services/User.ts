@@ -11,7 +11,20 @@ export default class UserService {
       }
       await this.validateEmailIfExists(email)
       await this.validateUsernameIfExists(username)
+      this.validatePassword(password)
       await UserAccountModel.create(data)
+      return true
+    } catch (err) {
+      throw err
+    }
+  }
+
+  private validatePassword(password: string): boolean {
+    try {
+      /**
+       * - harus mengandung huruf dan angka
+       * - panjang karakter minimal 8karakter
+       */
       return true
     } catch (err) {
       throw err
@@ -28,16 +41,18 @@ export default class UserService {
     }
   }
 
-  private async validateEmailIfExists(username: string): Promise<boolean> {
+  private async validateEmailIfExists(email: string): Promise<boolean> {
     try {
       //
+      const data = await UserAccountModel.findBy('email', email)
+      if (data) throw new Error('email Already Exists!')
       return false
     } catch (err) {
       throw err
     }
   }
 
-  private getCodeVerification(min: number = 1, max: number = 9999): string {
+  private getCodeVerification(min: number = 1000, max: number = 9999): string {
     return Math.floor(Math.random() * (max - min + 1) + min).toString()
   }
 }
