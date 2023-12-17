@@ -1,46 +1,43 @@
-import UserModel from 'App/Models/Mysql/UserAccounts'
+import UserAccountModel from 'App/Models/Mysql/UserAccounts'
 
-declare module 'App/Services/User' {
-  interface UserInfo {
-    userId: string
-    userEmail: string
-    userClient: number
-    password: string
-    userName: string
-    userPhoto: string
-    userKeyword: string
-  }
-}
 export default class UserService {
-  public async getInfoFromActiveUser(username: string): Promise<UserModel> {
+  public async createNewData({ email, username, password }): Promise<boolean> {
     try {
-      const data = await UserModel.query()
-        .select([
-          'user_id',
-          'user_email',
-          'user_client',
-          'user_password',
-          'user_name',
-          'user_photo',
-          'user_keyword',
-          'token_expired',
-        ])
-        .where({ user_name: username, is_trash: 0, user_status: 1 })
-        .first()
-      const serializedData = data?.serialize() as UserModel
-      return serializedData
+      const data = {
+        email,
+        username,
+        password,
+        codeVerification: this.getCodeVerification(),
+      }
+      await this.validateEmailIfExists(email)
+      await this.validateUsernameIfExists(username)
+      await UserAccountModel.create(data)
+      return true
     } catch (err) {
       throw err
     }
   }
 
-  public async updateLastLoginByUsername(username: string): Promise<void> {
+  private async validateUsernameIfExists(username: string): Promise<boolean> {
     try {
-      await UserModel.query().where({ user_name: username }).update({
-        user_logindate: new Date(),
-      })
+      const data = await UserAccountModel.findBy('username', username)
+      if (data) throw new Error('Username Already Exists!')
+      return false
     } catch (err) {
       throw err
     }
+  }
+
+  private async validateEmailIfExists(username: string): Promise<boolean> {
+    try {
+      //
+      return false
+    } catch (err) {
+      throw err
+    }
+  }
+
+  private getCodeVerification(min: number = 1, max: number = 9999): string {
+    return Math.floor(Math.random() * (max - min + 1) + min).toString()
   }
 }
