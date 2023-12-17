@@ -1,7 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.get('/', 'V1DocumentationUIController')
+  Route.get('/smart-hr', 'V1DocumentationUIController')
   Route.get('/spec.json', 'V1DocumentationSpecController')
   Route.get('/assets/:file', 'DocumentationUIAssetsController')
   // Route.get('/specs/:client', 'WhitelabelDocumentationSpecController')
