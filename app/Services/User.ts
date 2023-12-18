@@ -1,4 +1,5 @@
 import UserAccountModel from 'App/Models/Mysql/UserAccounts'
+import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class UserService {
   public async createNewData({ email, username, password }): Promise<boolean> {
@@ -12,6 +13,7 @@ export default class UserService {
       await this.validateEmailIfExists(email)
       await this.validateUsernameIfExists(username)
       this.validatePassword(password)
+      data.password = await this.hashPassword(password)
       await UserAccountModel.create(data)
       return true
     } catch (err) {
@@ -62,5 +64,14 @@ export default class UserService {
 
   private getCodeVerification(min: number = 1000, max: number = 9999): string {
     return Math.floor(Math.random() * (max - min + 1) + min).toString()
+  }
+
+  private async hashPassword(password: string): Promise<string> {
+    try {
+      const hashPass = await Hash.make(password)
+      return hashPass
+    } catch (err) {
+      throw err
+    }
   }
 }
