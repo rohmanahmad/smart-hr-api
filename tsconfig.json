@@ -33,8 +33,9 @@
       "@adonisjs/lucid",
       "@adonisjs/auth",
       "@adonisjs/redis",
-      "@adonisjs/limiter"
+      "@adonisjs/limiter",
+      "@adonisjs/shield"
     ],
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   }
 }

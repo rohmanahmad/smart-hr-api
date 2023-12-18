@@ -21,14 +21,15 @@ export default Env.rules({
   DRIVE_DISK: Env.schema.enum(['local'] as const),
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
   // APP
-  // APP_KEY: Env.schema.string(),
+  APP_KEY: Env.schema.string(),
   // SERVER_NAME: Env.schema.string(),
   // MYSQL Database
-  // MYSQL_HOST: Env.schema.string({ format: 'host' }),
-  // MYSQL_PORT: Env.schema.number(),
-  // MYSQL_USER: Env.schema.string(),
-  // MYSQL_PASSWORD: Env.schema.string(),
-  // MYSQL_DB_NAME: Env.schema.string(),
+  DB_CONNECTION: Env.schema.string(),
+  MYSQL_HOST: Env.schema.string({ format: 'host' }),
+  MYSQL_PORT: Env.schema.number(),
+  MYSQL_USER: Env.schema.string(),
+  MYSQL_PASSWORD: Env.schema.string(),
+  MYSQL_DB_NAME: Env.schema.string(),
 
   // MONGO_DSN: Env.schema.string(),
   // QUERY_MAX_TIME_MS: Env.schema.number(),

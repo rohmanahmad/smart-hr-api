@@ -34,7 +34,8 @@
     "./providers/Hash/MD5Provider",
     "@adonisjs/auth",
     "@adonisjs/redis",
-    "@adonisjs/limiter"
+    "@adonisjs/limiter",
+    "@adonisjs/shield"
   ],
   "aceProviders": [
     "@adonisjs/repl"

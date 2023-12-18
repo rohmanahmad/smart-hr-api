@@ -22,16 +22,18 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
   return {
-    name: 'Ripple10 API',
+    name: 'SmartHR API',
     version: '3.0.0',
   }
 })
-Route.get('/api/v3', async () => {
+Route.get('/api/v1', async () => {
   return {
-    name: 'Ripple10 API',
+    name: 'SmartHR API',
     version: '3.0.0',
   }
 })
 
 import 'App/Modules/Authentication/Routes'
 import 'App/Modules/Documentation/Routes'
+import 'App/Modules/Employee/Routes'
+import 'App/Modules/UserAccounts/Routes'
