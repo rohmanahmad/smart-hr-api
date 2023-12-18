@@ -21,10 +21,18 @@ export default class UserService {
 
   private validatePassword(password: string): boolean {
     try {
-      /**
-       * - harus mengandung huruf dan angka
-       * - panjang karakter minimal 8karakter
-       */
+      if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) {
+        throw new Error(' password must contain letters and numbers.')
+      }
+
+      if (password.length < 8) {
+        throw new Error('password must be at least 8 characters length')
+      }
+
+      if (!/[A-Z]/.test(password)) {
+        throw new Error('password must be at least contain uppercase')
+      }
+
       return true
     } catch (err) {
       throw err
