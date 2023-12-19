@@ -26,6 +26,16 @@ export default class ClientServie {
     - include alpha-numeric 
     - starts with alphabet
     */
-    return ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charLength = 10
+    let randomName = ''
+    randomName += characters.charAt(Math.floor(Math.random() * 52))
+    for (let i = 1; i < charLength; i++) {
+      let randomIndex = Math.floor(Math.random() * 62)
+
+      randomName += characters.charAt(randomIndex)
+    }
+
+    return randomName
   }
 }
