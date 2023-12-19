@@ -12,6 +12,15 @@ export default class Companies extends BaseModel {
   public _id: number
 
   @column({
+    columnName: 'clientId',
+    serializeAs: 'clientId',
+    serialize: (val: number) => {
+      return val || 0
+    },
+  })
+  public clientId: number
+
+  @column({
     columnName: 'name',
     serializeAs: 'name',
     serialize: (val: string) => {
@@ -36,7 +45,7 @@ export default class Companies extends BaseModel {
     columnName: 'cityId',
     serializeAs: 'cityId',
   })
-  public cityId: string
+  public cityId: number
 
   @column({
     columnName: 'provinceId',

@@ -2,9 +2,9 @@ const config = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: '(V3) Ripple10 API Documentation',
-      version: '3.0.0',
-      description: 'Ripple10 API Documentation',
+      title: '(v1.x.x) SmartHR API Documentation',
+      version: '1.0.0',
+      description: 'SmartHR API Documentation',
     },
     components: {
       securitySchemes: {
@@ -17,7 +17,12 @@ const config = {
     },
   },
 
-  apis: ['app/Modules/Authentication/**/*.yml'],
+  apis: [
+    'app/Modules/Documentation/**/*.yml',
+    'app/Modules/Authentication/**/*.yml',
+    'app/Modules/UserAccounts/**/*.yml',
+    'app/Modules/Employee/**/*.yml',
+  ],
   basePath: '/',
 }
 
