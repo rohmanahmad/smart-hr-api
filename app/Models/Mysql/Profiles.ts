@@ -4,10 +4,15 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 export default class Profiles extends BaseModel {
   public static table = 'profiles'
 
-  @column({ isPrimary: true, serializeAs: '_id' })
+  @column({
+    isPrimary: true,
+    columnName: '_id',
+    serializeAs: '_id',
+  })
   public _id: number
 
   @column({
+    columnName: 'firstName',
     serializeAs: 'firstName',
     serialize: (val: string) => {
       return val || ''
@@ -15,10 +20,14 @@ export default class Profiles extends BaseModel {
   })
   public firstName: string
 
-  @column({ serializeAs: 'lastName' })
+  @column({
+    columnName: 'lastName',
+    serializeAs: 'lastName',
+  })
   public lastName: string
 
   @column({
+    columnName: 'pictureUrl',
     serializeAs: 'pictureUrl',
     serialize: (val: string) => {
       return val || 'https://profile.com/c/no-user.png'
@@ -27,6 +36,7 @@ export default class Profiles extends BaseModel {
   public pictureUrl: string
 
   @column({
+    columnName: 'address',
     serializeAs: 'address',
     serialize: (val: string) => {
       return val || '-'
@@ -35,6 +45,7 @@ export default class Profiles extends BaseModel {
   public address: string
 
   @column({
+    columnName: 'locationId',
     serializeAs: 'locationId',
     serialize: (val: number) => {
       return val || ''
@@ -43,6 +54,7 @@ export default class Profiles extends BaseModel {
   public locationId: number
 
   @column({
+    columnName: 'birthDate',
     serializeAs: 'birthDate',
     serialize: (val: string) => {
       return val || '1990-01-01'
@@ -51,6 +63,7 @@ export default class Profiles extends BaseModel {
   public birthDate: string
 
   @column({
+    columnName: 'gender',
     serializeAs: 'gender',
     serialize: (val: string) => {
       /* 
@@ -64,6 +77,7 @@ export default class Profiles extends BaseModel {
   public gender: string
 
   @column({
+    columnName: 'createdAt',
     serializeAs: 'createdAt',
     serialize: (val: DateTime) => {
       return val || ''
@@ -72,6 +86,7 @@ export default class Profiles extends BaseModel {
   public createdAt: DateTime
 
   @column({
+    columnName: 'updatedAt',
     serializeAs: 'updatedAt',
     serialize: (val: DateTime) => {
       return val || ''
