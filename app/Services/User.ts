@@ -2,10 +2,19 @@ import UserAccountModel from 'App/Models/Mysql/UserAccounts'
 import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class UserService {
-  public async createNewData({ email, username, password, companyId }): Promise<boolean> {
+  public async createNewData({
+    email,
+    firstName,
+    lastName,
+    username,
+    password,
+    companyId,
+  }): Promise<boolean> {
     try {
       const data = {
         email,
+        firstName,
+        lastName,
         companyId,
         username,
         password,

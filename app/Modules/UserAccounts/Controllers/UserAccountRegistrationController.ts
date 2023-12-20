@@ -6,8 +6,17 @@ import ClientServie from 'App/Services/Clients'
 export default class UserAccountRegistrationController {
   public async handle({ request, response, auth }: HttpContextContract) {
     try {
-      const { email, username, companyName, password, confirmPassword } = request.body()
-      await this.doRegister({ email, username, companyName, password, confirmPassword })
+      const { email, firstName, lastName, username, companyName, password, confirmPassword } =
+        request.body()
+      await this.doRegister({
+        email,
+        firstName,
+        lastName,
+        username,
+        companyName,
+        password,
+        confirmPassword,
+      })
       response.apiSuccess({})
     } catch (err) {
       response.apiError(err)
@@ -18,22 +27,40 @@ export default class UserAccountRegistrationController {
 
   private async doRegister({
     email,
+    firstName,
+    lastName,
     username,
     companyName,
     password,
     confirmPassword,
   }): Promise<boolean> {
     try {
-      await this.validateUserInput({ email, username, password, confirmPassword, companyName })
+      await this.validateUserInput({
+        email,
+        firstName,
+        lastName,
+        username,
+        password,
+        confirmPassword,
+        companyName,
+      })
       const clientId = await this.createClient()
-      // const companyId = await this.createCompany(clientId, companyName)
-      // await this.createUserAccount({ email, username, password, companyId })
+      const companyId = await this.createCompany(clientId, companyName)
+      await this.createUserAccount({ email, firstName, lastName, username, password, companyId })
       return true
     } catch (err) {
       throw err
     }
   }
-  private async validateUserInput({ email, username, password, confirmPassword, companyName }) {
+  private async validateUserInput({
+    email,
+    firstName,
+    lastName,
+    username,
+    password,
+    confirmPassword,
+    companyName,
+  }) {
     try {
       if (password !== confirmPassword) throw new Error("Password Doesn't match")
       const us = new UserService()
@@ -46,10 +73,17 @@ export default class UserAccountRegistrationController {
       throw err
     }
   }
-  private async createUserAccount({ email, username, password, companyId }): Promise<void> {
+  private async createUserAccount({
+    email,
+    firstName,
+    lastName,
+    username,
+    password,
+    companyId,
+  }): Promise<void> {
     try {
       const us = new UserService()
-      await us.createNewData({ email, username, password, companyId })
+      await us.createNewData({ email, firstName, lastName, username, password, companyId })
     } catch (err) {
       throw err
     }
