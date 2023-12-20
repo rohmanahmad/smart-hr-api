@@ -13,6 +13,10 @@
             properties:
               email:
                 $ref: '#/definitions/generals/string'
+              firstName:
+                $ref: '#/definitions/generals/string'
+              lastName:
+                $ref: '#/definitions/generals/string'
               username:
                 $ref: '#/definitions/generals/string'
               companyName:
@@ -21,6 +25,7 @@
                 $ref: '#/definitions/generals/password'
               confirmPassword:
                 $ref: '#/definitions/generals/password'
+
     responses:
       '200':
         description: Success

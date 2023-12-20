@@ -12,6 +12,8 @@ export default class extends BaseSchema {
         .notNullable()
         .references('companies.code')
         .comment('Ref: companies.code')
+      table.string('firstName', 10)
+      table.string('lastName', 10)
       table.string('username', 20).unique()
       table.string('email', 100).unique()
       table.string('password', 255).comment('Hashed Value')

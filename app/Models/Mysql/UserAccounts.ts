@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class UserAccounts extends BaseModel {
-  public static table = 'userAccounts'
+  public static table = 'user_accounts'
 
   // @column({ isPrimary: true, serializeAs: '_id' })
   public _id: number
