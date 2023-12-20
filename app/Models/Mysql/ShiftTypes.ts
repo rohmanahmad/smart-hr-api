@@ -5,20 +5,20 @@ export default class ShiftTypes extends BaseModel {
   public static table = 'shiftTypes'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'code',
+    serializeAs: 'code',
     isPrimary: true,
   })
-  public _id: number
+  public code: string
 
   @column({
-    columnName: 'companyId',
-    serializeAs: 'companyId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'companyCode',
+    serializeAs: 'companyCode',
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public companyId: number
+  public companyCode: string
 
   @column({
     columnName: 'name',

@@ -5,16 +5,22 @@ export default class extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      // table.increments('_id').primary()
+      table.increments('_id').primary()
+      table.string('companyCode', 3).notNullable().references('companies.code')
       table.string('employeeCode', 8).notNullable().references('employees.code')
       table.string('shiftCode', 3).notNullable().references('shift_types.code')
-      table.string('clockType', 20).notNullable()
       table.date('date')
-      table.time('time')
-      table.string('status', 20).nullable()
-      table.string('note', 255).nullable()
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+      table.time('clockInAt').nullable()
+      table.time('clockOutAt').nullable()
+      table.string('locationCoordinate').nullable().comment('Lokasi Saat Absen Dilakukan')
+      table.string('status', 20).nullable().comment('[late,ontime,early,others]')
+      table
+        .string('note', 255)
+        .nullable()
+        .comment('diisi oleh karyawan yg bersangkutan saat absen dilakukan')
+      table.boolean('isAproved').notNullable().defaultTo(false)
+      table.timestamp('createdAt', { useTz: true })
+      table.timestamp('updatedAt', { useTz: true })
     })
   }
 

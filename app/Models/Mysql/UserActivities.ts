@@ -12,13 +12,13 @@ export default class UserActivities extends BaseModel {
   public _id: number
 
   @column({
-    columnName: 'userId',
-    serializeAs: 'userId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'userCode',
+    serializeAs: 'userCode',
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public userId: number
+  public userCode: string
 
   @column({
     columnName: 'date',

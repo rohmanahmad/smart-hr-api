@@ -4,17 +4,20 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 export default class UserAccounts extends BaseModel {
   public static table = 'user_accounts'
 
-  // @column({ isPrimary: true, serializeAs: '_id' })
-  public _id: number
+  @column({
+    isPrimary: true,
+    serializeAs: 'code',
+  })
+  public code: string
 
   @column({
-    columnName: 'companyId',
-    serializeAs: 'companyId',
+    columnName: 'companyCode',
+    serializeAs: 'companyCode',
     serialize: (val: string) => {
       return val || ''
     },
   })
-  public companyId: string
+  public companyCode: string
 
   @column({
     columnName: 'username',

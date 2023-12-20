@@ -12,11 +12,9 @@ export default class extends BaseSchema {
         .notNullable()
         .references('companies.code')
         .comment('Ref: companies.code')
-      table.string('firstName', 10)
-      table.string('lastName', 10)
       table.string('username', 20).unique()
       table.string('email', 100).unique()
-      table.string('password', 255).comment('Hashed Value')
+      table.text('password').comment('Hashed Value')
       table.string('status', 20).comment('[active|inactive|pending-confirmation|suspend]')
       table.boolean('trashStatus').comment('true|false')
       table

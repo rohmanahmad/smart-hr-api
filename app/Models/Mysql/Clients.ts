@@ -5,11 +5,11 @@ export default class Clients extends BaseModel {
   public static table = 'clients'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'code',
+    serializeAs: 'code',
     isPrimary: true,
   })
-  public _id: number
+  public code: string
 
   @column({
     columnName: 'name',
@@ -21,10 +21,10 @@ export default class Clients extends BaseModel {
   public name: string
 
   @column({
-    columnName: 'subscriptionId',
-    serializeAs: 'subscriptionId',
+    columnName: 'subscriptionCode',
+    serializeAs: 'subscriptionCode',
   })
-  public subscriptionId: string
+  public subscriptionCode: string
 
   @column({
     columnName: 'createdAt',

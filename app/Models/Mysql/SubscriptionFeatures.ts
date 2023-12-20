@@ -12,10 +12,10 @@ export default class SubscriptionFeatures extends BaseModel {
   public _id: number
 
   @column({
-    columnName: 'subscriptionId',
-    serializeAs: 'subscriptionId',
+    columnName: 'subscriptionCode',
+    serializeAs: 'subscriptionCode',
   })
-  public subscriptionId: number
+  public subscriptionCode: string
 
   @column({
     columnName: 'feature',

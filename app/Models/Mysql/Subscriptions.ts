@@ -5,11 +5,11 @@ export default class Subscriptions extends BaseModel {
   public static table = 'subscriptions'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'code',
+    serializeAs: 'code',
     isPrimary: true,
   })
-  public _id: number
+  public code: string
 
   @column({
     columnName: 'name',

@@ -4,42 +4,54 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 export default class Employees extends BaseModel {
   public static table = 'employees'
 
-  @column({ isPrimary: true, serializeAs: '_id' })
-  public _id: number
-
   @column({
-    serializeAs: 'companyId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'code',
+    serializeAs: 'code',
+    isPrimary: true,
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public companyId: number
+  public code: string
 
   @column({
-    serializeAs: 'userId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'companyCode',
+    serializeAs: 'companyCode',
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public userId: number
+  public companyCode: string
 
   @column({
-    serializeAs: 'departementId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'userCode',
+    serializeAs: 'userCode',
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public departementId: number
+  public userCode: string
 
   @column({
-    serializeAs: 'profileId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'departementCode',
+    serializeAs: 'departementCode',
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public profileId: number
+  public departementCode: string
 
   @column({
+    columnName: 'profileCode',
+    serializeAs: 'profileCode',
+    serialize: (val: string) => {
+      return val || ''
+    },
+  })
+  public profileCode: string
+
+  @column({
+    columnName: 'employmentStatus',
     serializeAs: 'employmentStatus',
     serialize: (val: number) => {
       return val || 'contract'
@@ -48,6 +60,7 @@ export default class Employees extends BaseModel {
   public employmentStatus: string
 
   @column({
+    columnName: 'salary',
     serializeAs: 'salary',
     serialize: (val: number) => {
       return val || 0
@@ -56,6 +69,7 @@ export default class Employees extends BaseModel {
   public salary: string
 
   @column({
+    columnName: 'jobPosition',
     serializeAs: 'jobPosition',
     serialize: (val: string) => {
       /* 
@@ -71,6 +85,7 @@ export default class Employees extends BaseModel {
   public jobPosition: string
 
   @column({
+    columnName: 'hireDate',
     serializeAs: 'hireDate',
     serialize: (val: string) => {
       return val || ''
@@ -79,6 +94,7 @@ export default class Employees extends BaseModel {
   public hireDate: string
 
   @column({
+    columnName: 'createdAt',
     serializeAs: 'createdAt',
     serialize: (val: DateTime) => {
       return val || ''
@@ -87,6 +103,7 @@ export default class Employees extends BaseModel {
   public createdAt: DateTime
 
   @column({
+    columnName: 'updatedAt',
     serializeAs: 'updatedAt',
     serialize: (val: DateTime) => {
       return val || ''
