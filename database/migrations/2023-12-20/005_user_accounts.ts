@@ -17,10 +17,6 @@ export default class extends BaseSchema {
       table.text('password').comment('Hashed Value')
       table.string('status', 20).comment('[active|inactive|pending-confirmation|suspend]')
       table.boolean('trashStatus').comment('true|false')
-      table
-        .string('codeVerification', 6)
-        .nullable()
-        .comment('untuk verifikasi saat register dan forgot password')
       table.string('permissionType', 20)
       table.timestamp('createdAt', { useTz: true })
       table.dateTime('updatedAt', { useTz: true })

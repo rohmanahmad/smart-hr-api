@@ -98,18 +98,18 @@ export default class EmployeeAttendances extends BaseModel {
   @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public createdAt: DateTime
+  public createdAt: string | null
 
   @column({
     columnName: 'updatedAt',
     serializeAs: 'updatedAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public updatedAt: DateTime
+  public updatedAt: string | null
 }

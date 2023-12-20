@@ -1,31 +1,30 @@
 import UserAccountModel from 'App/Models/Mysql/UserAccounts'
 import Hash from '@ioc:Adonis/Core/Hash'
+import { randomString } from 'App/Helpers/Utilities'
+
+type UserCode = string
 
 export default class UserService {
-  public async createNewData({
-    email,
-    firstName,
-    lastName,
-    username,
-    password,
-    companyId,
-  }): Promise<boolean> {
+  public async createNewData({ companyCode, email, username, password }): Promise<UserCode> {
     try {
       const data = {
+        code: this.getRandomCode(),
+        companyCode,
         email,
-        firstName,
-        lastName,
-        companyId,
         username,
         password,
-        codeVerification: this.getCodeVerification(),
       }
       data.password = await this.hashPassword(password)
-      await UserAccountModel.create(data)
-      return true
+      const res = await UserAccountModel.create(data)
+      const userCode: string = res.toJSON().code
+      return userCode
     } catch (err) {
       throw err
     }
+  }
+
+  private getRandomCode(): string {
+    return randomString(3, { alphabetPre: true })
   }
 
   public validatePassword(password: string): boolean {
@@ -69,8 +68,13 @@ export default class UserService {
     }
   }
 
-  private getCodeVerification(min: number = 1000, max: number = 9999): string {
-    return Math.floor(Math.random() * (max - min + 1) + min).toString()
+  public async deleteUser(userCode: string) {
+    try {
+      const data = await UserAccountModel.findByOrFail('code', userCode)
+      await data.delete()
+    } catch (err) {
+      throw err
+    }
   }
 
   private async hashPassword(password: string): Promise<string> {

@@ -4,6 +4,14 @@ const channelItems = Config.get('streams.channel_items', [])
 import { ServiceCategories } from 'App/Interfaces/Channels'
 import { ServiceObject } from 'App/Interfaces'
 
+export const DateTimeNowISO = function (): string | null {
+  return DateTime.utc().toSQLDate()
+}
+
+export const DateUTC = function () {
+  return DateTime.utc()
+}
+
 export const ProjectSplitter = function (project: string): Array<number> {
   return project
     .split(',')
@@ -45,4 +53,28 @@ export const MapServiceCategory = function (
   return ch
 }
 
-export const timezone = 7 * 60 * 60 * 1000
+export const randomString = function (
+  size: number,
+  opt?: { number?: boolean; alphabetUp?: boolean; alphabetLo?: boolean; alphabetPre?: boolean }
+): string {
+  const n = '0123456789'
+  const s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let characters = ''
+  if (opt?.number) characters += n
+  if (opt?.alphabetUp) characters += s
+  if (opt?.alphabetLo) characters += s.toLowerCase()
+  if (characters.length === 0) characters = n + s + s.toLocaleLowerCase()
+  let randomCode = ''
+  if (opt?.alphabetPre) randomCode += s.charAt(Math.floor(Math.random() * s.length))
+  const remainingSize = size - randomCode.length
+  for (let i = 1; i <= remainingSize; i++) {
+    let randomIndex = Math.floor(Math.random() * characters.length)
+
+    randomCode += characters.charAt(randomIndex)
+  }
+
+  return randomCode
+}
+
+export const timezoneValue = 7 * 60 * 60 * 1000
+export const timezoneString = 'Asia/Jakarta'
