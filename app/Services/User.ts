@@ -8,7 +8,7 @@ export default class UserService {
   public async createNewData({ companyCode, email, username, password }): Promise<UserCode> {
     try {
       const data = {
-        code: this.getRandomCode(), // tipe: string -> membuat random code
+        code: await this.getRandomCode(), // tipe: string -> membuat random code
         companyCode,
         email,
         username,
@@ -23,8 +23,21 @@ export default class UserService {
     }
   }
 
-  private getRandomCode(): string {
-    return randomString(3, { alphabetPre: true })
+  private async checkIfExists(code: string): Promise<boolean> {
+    const data = await UserAccountModel.findBy('code', code)
+    if (data) return true // code already exists
+    return false
+  }
+
+  private async getRandomCode(): Promise<string> {
+    let code = randomString(3, { alphabetPre: true })
+    // check if exists by code
+    let isExists = true
+    do {
+      isExists = await this.checkIfExists(code)
+      if (isExists) code = randomString(3, { alphabetPre: true })
+    } while (isExists)
+    return code
   }
 
   public validatePassword(password: string): boolean {

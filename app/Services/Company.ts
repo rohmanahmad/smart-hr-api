@@ -7,7 +7,7 @@ export default class CompanyService {
   public async createNewCompany(companyName: string): Promise<CompanyCode> {
     try {
       const data = {
-        code: this.getRandomCode(),
+        code: await this.getRandomCode(),
         name: companyName,
         // description: null,
         // address: null,
@@ -36,9 +36,20 @@ export default class CompanyService {
       throw err
     }
   }
-
-  private getRandomCode(): string {
-    return randomString(3, { alphabetPre: true })
+  private async checkIfExists(code: string): Promise<boolean> {
+    const data = await CompaniesModel.findBy('code', code)
+    if (data) return true // code already exists
+    return false
+  }
+  private async getRandomCode(): Promise<string> {
+    let code = randomString(3, { alphabetPre: true })
+    // check if exists by code
+    let isExists = true
+    do {
+      isExists = await this.checkIfExists(code)
+      if (isExists) code = randomString(3, { alphabetPre: true })
+    } while (isExists)
+    return code
   }
 
   public validateCompanyName(name: string): boolean {

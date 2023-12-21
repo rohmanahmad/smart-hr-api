@@ -10,16 +10,11 @@ export default class ClientServie {
     try {
       const data = {
         // _id: null,
-        code: this.getRandomCode(),
+        code: await this.getRandomCode(),
         name: this.getRandomName(),
         // subscriptionId: null,
         // updatedAt: null,
       }
-      // check if exists by code
-      let isExists = true
-      do {
-        isExists = await this.checkIfExists(data.code)
-      } while (isExists)
       const res = await ClientModel.create(data)
       const clientCode: string = res.toJSON().code
       return clientCode
@@ -66,8 +61,15 @@ export default class ClientServie {
     return false
   }
 
-  private getRandomCode(): string {
-    return randomString(3, { alphabetPre: true })
+  private async getRandomCode(): Promise<string> {
+    let code = randomString(3, { alphabetPre: true })
+    // check if exists by code
+    let isExists = true
+    do {
+      isExists = await this.checkIfExists(code)
+      if (isExists) code = randomString(3, { alphabetPre: true })
+    } while (isExists)
+    return code
   }
 
   private getRandomName(): string {
