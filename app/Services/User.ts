@@ -22,7 +22,7 @@ export default class UserService {
       throw err
     }
   }
-
+  
   private async checkIfExists(code: string): Promise<boolean> {
     const data = await UserAccountModel.findBy('code', code)
     if (data) return true // code already exists
