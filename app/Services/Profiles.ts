@@ -7,7 +7,7 @@ export default class Profiles {
   public async createProfile({ firstName, lastName }): Promise<ProfileCode> {
     try {
       const data = {
-        code: this.getRandomCode(),
+        code: await this.getRandomCode(),
         firstName,
         lastName,
         // pictureUrl: '',
@@ -35,7 +35,20 @@ export default class Profiles {
     }
   }
 
-  private getRandomCode(): string {
-    return randomString(5, { alphabetLo: true, alphabetPre: true, number: true })
+  private async checkIfExists(code: string): Promise<boolean> {
+    const data = await ProfileModel.findBy('code', code)
+    if (data) return true // code already exists
+    return false
+  }
+
+  private async getRandomCode(): Promise<string> {
+    let code = randomString(5, { alphabetLo: true, alphabetPre: true, number: true })
+    // check if exists by code
+    let isExists = true
+    do {
+      isExists = await this.checkIfExists(code)
+      if (isExists) code = randomString(5, { alphabetLo: true, alphabetPre: true, number: true })
+    } while (isExists)
+    return code
   }
 }

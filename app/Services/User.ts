@@ -22,20 +22,22 @@ export default class UserService {
       throw err
     }
   }
+  
+  private async checkIfExists(code: string): Promise<boolean> {
+    const data = await UserAccountModel.findBy('code', code)
+    if (data) return true // code already exists
+    return false
+  }
 
   private async getRandomCode(): Promise<string> {
-    try {
-      let code = randomString(3, { alphabetPre: true })
-      let isExists = true
-      do {
-        const res = await UserAccountModel.findBy('code', code)
-        if (!res) isExists = false
-        else code = randomString(3, { alphabetPre: true })
-      } while (isExists)
-      return code
-    } catch (err) {
-      throw err
-    }
+    let code = randomString(3, { alphabetPre: true })
+    // check if exists by code
+    let isExists = true
+    do {
+      isExists = await this.checkIfExists(code)
+      if (isExists) code = randomString(3, { alphabetPre: true })
+    } while (isExists)
+    return code
   }
 
   public validatePassword(password: string): boolean {

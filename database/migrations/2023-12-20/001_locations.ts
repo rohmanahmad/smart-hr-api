@@ -6,25 +6,33 @@ export default class extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       // table.increments('_id').unique()
-      table
-        .string('code', 30)
-        .notNullable()
-        .unique()
-        .primary()
-        .comment(
-          'Uniq Code Terdiri dari "Gabungan" [[kode_negara]-[kode_provinsi]-[kode_kabkota]-[kode_kecamatan]-kode_desa]'
-        )
+      table.string('code', 4).notNullable().unique().primary().comment('Uniq Code Random')
       table.string('postalCode').notNullable().comment('Kode Pos Sebagai Referensi')
       table
         .string('name')
         .unique()
         .notNullable()
         .comment('Nama Lokasi (Desa, Kecamatan, Kabupaten Kota, Provinsi)')
-      table.string('negaraCode').unique().notNullable().comment('pasti punya Negara code')
-      table.string('provinsiCode').unique().notNullable().comment('pasti punya Provinsi code')
-      table.string('kabkotaCode').unique().nullable().comment('optional')
-      table.string('kecamatanCode').unique().nullable().comment('optional')
-      table.string('desaCode').unique().nullable().comment('optional')
+      table.string('negaraCode', 4).unique().notNullable().comment('pasti punya Negara code')
+      table.string('provinsiCode', 4).unique().notNullable().comment('pasti punya Provinsi code')
+      table
+        .string('kabkotaCode', 4)
+        .unique()
+        .nullable()
+        .references('locations.code')
+        .comment('optional')
+      table
+        .string('kecamatanCode', 4)
+        .unique()
+        .nullable()
+        .references('locations.code')
+        .comment('optional')
+      table
+        .string('desaCode', 4)
+        .unique()
+        .nullable()
+        .references('locations.code')
+        .comment('optional')
       table.timestamp('createdAt', { useTz: true })
       table.timestamp('updatedAt', { useTz: true })
     })
