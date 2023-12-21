@@ -82,11 +82,11 @@ export default class UserAccountRegistrationController {
 
   private async rollbackDataToDefault(rollbackData: RollbackData) {
     try {
-      if (rollbackData.relationId) await this.rollbackClientRelation(rollbackData.relationId)
-      if (rollbackData.userCode) await this.rollbackUser(rollbackData.userCode)
-      if (rollbackData.companyCode) await this.rollbackCompany(rollbackData.companyCode)
-      if (rollbackData.clientCode) await this.rollbackClient(rollbackData.clientCode)
-      if (rollbackData.profileCode) await this.rollbackProfile(rollbackData.profileCode)
+      if (rollbackData.relationId) await this.rollbackClientRelation(rollbackData.relationId) // tipe promise<void> -> jika dalam variabel rollbackdata ada relation id maka hapus relationid
+      if (rollbackData.userCode) await this.rollbackUser(rollbackData.userCode) // tipe promise<void> jika dalam variabel rollbackdata ada usercode maka hapus usercode
+      if (rollbackData.companyCode) await this.rollbackCompany(rollbackData.companyCode) // tipe promise<void> jika dalam variabel rollbackdata ada companycode maka hapus companycode
+      if (rollbackData.clientCode) await this.rollbackClient(rollbackData.clientCode) // tipe promise<void> jika dalam variabel rollbackdata ada clientcode maka hapus clientcode
+      if (rollbackData.profileCode) await this.rollbackProfile(rollbackData.profileCode) // tipe promise<void> jika dalam variabel rollbackdata ada profilcode maka hapus profilcode
     } catch (err) {
       throw err
     }
