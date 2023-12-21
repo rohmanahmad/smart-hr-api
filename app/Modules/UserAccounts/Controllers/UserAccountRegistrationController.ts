@@ -44,7 +44,7 @@ export default class UserAccountRegistrationController {
     password,
     confirmPassword,
   }): Promise<boolean> {
-    const rollbackData: RollbackData = {}
+    const rollbackData: RollbackData = {} // nilai awal: object{} tipe: RollbackData
     try {
       await this.validateUserInput({
         email,
@@ -52,21 +52,21 @@ export default class UserAccountRegistrationController {
         password,
         confirmPassword,
         companyName,
-      })
-      const clientCode = await this.createClient()
-      rollbackData.clientCode = clientCode
-      const companyCode = await this.createCompany(companyName)
-      rollbackData.companyCode = companyCode
-      const profileCode = await this.createProfile({ firstName, lastName })
-      rollbackData.profileCode = profileCode
-      const userCode = await this.createUserAccount({ companyCode, email, username, password })
-      rollbackData.userCode = userCode
-      const relationId = await this.createRelationClientAdmin({ userCode, clientCode })
-      rollbackData.relationId = relationId
-      await this.createCodeVerification(userCode)
-      return true
+      }) // tipe: Promise<void> -> validasi input
+      const clientCode = await this.createClient() // tipe Promise<string> -> mendapatkan clientcode dari tabel client
+      rollbackData.clientCode = clientCode // memasukkan data dalam variabel rollbackdata dengan key "clientcode" dan value bertipedata: string
+      const companyCode = await this.createCompany(companyName) // tipe Promise<string> -> mendapatkan companycode dari tabel company
+      rollbackData.companyCode = companyCode // memasukkan data dalam variabel rollbackdata dengan key "companycode" dan value bertipedata: string
+      const profileCode = await this.createProfile({ firstName, lastName }) // tipe Promise<string> -> mendapatkan profilcode dari tabel profil berdasarkan firstName dan lastName
+      rollbackData.profileCode = profileCode // memasukkan data dalam variabel rollbackdata dengan key "profilecode" dan value bertipedata: string
+      const userCode = await this.createUserAccount({ companyCode, email, username, password }) // tipe Promise<string> -> mendapatkan usercode dari tabel userAccount berdasarkan companycode email username dan password
+      rollbackData.userCode = userCode // memasukkan data dalam variabel rollbackdata dengan key "usercode" dan value bertipedata: string
+      const relationId = await this.createRelationClientAdmin({ userCode, clientCode }) // tipe Promise<number> -> mendapatkan relationid dari tabel clientadmin berdasarkan usercode dan cliencode
+      rollbackData.relationId = relationId // memasukkan data dalam variabel rollbackdata dengan key "relationid" dan value bertipedata: number
+      await this.createCodeVerification(userCode) // tipe Promise<void> -> membuat kode verifikasi
+      return true //
     } catch (err) {
-      await this.rollbackDataToDefault(rollbackData)
+      await this.rollbackDataToDefault(rollbackData) // jika eror kembalikan data ke default
       throw err
     }
   }
