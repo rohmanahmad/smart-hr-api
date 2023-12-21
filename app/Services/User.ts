@@ -8,16 +8,16 @@ export default class UserService {
   public async createNewData({ companyCode, email, username, password }): Promise<UserCode> {
     try {
       const data = {
-        code: this.getRandomCode(),
+        code: this.getRandomCode(), // tipe: string -> membuat random code
         companyCode,
         email,
         username,
         password,
-      }
-      data.password = await this.hashPassword(password)
-      const res = await UserAccountModel.create(data)
-      const userCode: string = res.toJSON().code
-      return userCode
+      } // memasukkan kedalam data semua value diparameter
+      data.password = await this.hashPassword(password) // tipe: promise<string> -> menjadikan hash password
+      const res = await UserAccountModel.create(data) // membuat data user dan dimasukkan kedalam variabel res
+      const userCode: string = res.toJSON().code // mengambil usercode dari object data.code
+      return userCode // mengembalikan user code
     } catch (err) {
       throw err
     }
