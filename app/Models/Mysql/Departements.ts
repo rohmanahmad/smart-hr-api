@@ -5,29 +5,17 @@ export default class Departements extends BaseModel {
   public static table = 'departements'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'code',
+    serializeAs: 'code',
     isPrimary: true,
   })
-  public _id: number
+  public code: string
 
   @column({
-    columnName: 'companyId',
-    serializeAs: 'companyId',
-    serialize: (val: number) => {
-      return val || 0
-    },
+    columnName: 'companyCode',
+    serializeAs: 'companyCode',
   })
-  public companyId: number
-
-  @column({
-    columnName: 'managerId', // relation to employees._id
-    serializeAs: 'managerId',
-    serialize: (val: number) => {
-      return val || 0
-    },
-  })
-  public managerId: number
+  public companyCode: string
 
   @column({
     columnName: 'name',
@@ -44,18 +32,18 @@ export default class Departements extends BaseModel {
   @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public createdAt: DateTime
+  public createdAt: string | null
 
   @column({
     columnName: 'updatedAt',
     serializeAs: 'updatedAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public updatedAt: DateTime
+  public updatedAt: string | null
 }

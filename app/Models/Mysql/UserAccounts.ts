@@ -4,17 +4,20 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 export default class UserAccounts extends BaseModel {
   public static table = 'user_accounts'
 
-  // @column({ isPrimary: true, serializeAs: '_id' })
-  public _id: number
+  @column({
+    isPrimary: true,
+    serializeAs: 'code',
+  })
+  public code: string
 
   @column({
-    columnName: 'companyId',
-    serializeAs: 'companyId',
+    columnName: 'companyCode',
+    serializeAs: 'companyCode',
     serialize: (val: string) => {
       return val || ''
     },
   })
-  public companyId: string
+  public companyCode: string
 
   @column({
     columnName: 'username',
@@ -86,18 +89,18 @@ export default class UserAccounts extends BaseModel {
   @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public createdAt: DateTime
+  public createdAt: string | null
 
   @column({
     columnName: 'updatedAt',
     serializeAs: 'updatedAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public updatedAt: DateTime
+  public updatedAt: string | null
 }

@@ -1,42 +1,30 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class UserActivities extends BaseModel {
-  public static table = 'userActivities'
+export default class ClientAdmins extends BaseModel {
+  public static table = 'client_admins'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'id',
+    serializeAs: 'id',
     isPrimary: true,
   })
-  public _id: number
+  public id: number
 
   @column({
-    columnName: 'userCode',
-    serializeAs: 'userCode',
+    columnName: 'clientCode',
+    serializeAs: 'clientCode',
     serialize: (val: string) => {
       return val || ''
     },
   })
+  public clientCode: string
+
+  @column({
+    columnName: 'userCode',
+    serializeAs: 'userCode',
+  })
   public userCode: string
-
-  @column({
-    columnName: 'date',
-    serializeAs: 'date',
-  })
-  public date: DateTime
-
-  @column({
-    columnName: 'type',
-    serializeAs: 'type',
-  })
-  public type: string
-
-  @column({
-    columnName: 'detail',
-    serializeAs: 'detail',
-  })
-  public detail: string
 
   @column({
     columnName: 'createdAt',

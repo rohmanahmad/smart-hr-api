@@ -5,11 +5,11 @@ export default class Subscriptions extends BaseModel {
   public static table = 'subscriptions'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'code',
+    serializeAs: 'code',
     isPrimary: true,
   })
-  public _id: number
+  public code: string
 
   @column({
     columnName: 'name',
@@ -35,18 +35,18 @@ export default class Subscriptions extends BaseModel {
   @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public createdAt: DateTime
+  public createdAt: string | null
 
   @column({
     columnName: 'updatedAt',
     serializeAs: 'updatedAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public updatedAt: DateTime
+  public updatedAt: string | null
 }

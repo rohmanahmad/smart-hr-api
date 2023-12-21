@@ -7,11 +7,11 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       // table.increments('_id')
       table.string('code', 5).primary().unique()
-      table
-        .string('userCode', 8)
-        .notNullable()
-        .references('user_accounts.code')
-        .comment('Gabungan Antara Kode Perusahaan dan Kode Uniq User ex: PJR-KLX1')
+      // table
+      //   .string('userCode', 8)
+      //   .notNullable()
+      //   .references('user_accounts.code')
+      //   .comment('Gabungan Antara Kode Perusahaan dan Kode Uniq User ex: PJR-KLX1')
       table.string('firstName', 30).nullable().comment('optional')
       table.string('lastName', 30).nullable().comment('optional')
       table.text('pictureUrl').nullable().comment('optional')

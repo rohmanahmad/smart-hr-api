@@ -6,10 +6,10 @@ export default class Profiles extends BaseModel {
 
   @column({
     isPrimary: true,
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'code',
+    serializeAs: 'code',
   })
-  public _id: number
+  public code: string
 
   @column({
     columnName: 'firstName',
@@ -45,13 +45,13 @@ export default class Profiles extends BaseModel {
   public address: string
 
   @column({
-    columnName: 'locationId',
-    serializeAs: 'locationId',
-    serialize: (val: number) => {
+    columnName: 'locationCode',
+    serializeAs: 'locationCode',
+    serialize: (val: string) => {
       return val || ''
     },
   })
-  public locationId: number
+  public locationCode: string
 
   @column({
     columnName: 'birthDate',
@@ -79,18 +79,18 @@ export default class Profiles extends BaseModel {
   @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public createdAt: DateTime
+  public createdAt: string | null
 
   @column({
     columnName: 'updatedAt',
     serializeAs: 'updatedAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public updatedAt: DateTime
+  public updatedAt: string | null
 }

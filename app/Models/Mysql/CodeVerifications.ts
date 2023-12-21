@@ -1,51 +1,41 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class ShiftTypes extends BaseModel {
-  public static table = 'shiftTypes'
+export default class CodeVerifications extends BaseModel {
+  public static table = 'code_verifications'
 
   @column({
-    columnName: 'code',
-    serializeAs: 'code',
     isPrimary: true,
+    serializeAs: 'code',
   })
   public code: string
 
   @column({
-    columnName: 'companyCode',
-    serializeAs: 'companyCode',
+    columnName: 'userCode',
+    serializeAs: 'userCode',
     serialize: (val: string) => {
       return val || ''
     },
   })
-  public companyCode: string
+  public userCode: string
 
   @column({
-    columnName: 'name',
-    serializeAs: 'name',
+    columnName: 'codeType',
+    serializeAs: 'codeType',
     serialize: (val: string) => {
       return val || ''
     },
   })
-  public name: string
+  public codeType: string
 
   @column({
-    columnName: 'description',
-    serializeAs: 'description',
+    columnName: 'ttl',
+    serializeAs: 'ttl',
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
+    },
   })
-  public description: string
-
-  @column({
-    columnName: 'clockIn',
-    serializeAs: 'clockIn',
-  })
-  public clockIn: string // time Format: HH:mm
-
-  @column({
-    columnName: 'clockOut',
-    serializeAs: 'clockOut',
-  })
-  public clockOut: string // time Format: HH:mm
+  public ttl: string | null
 
   @column({
     columnName: 'createdAt',

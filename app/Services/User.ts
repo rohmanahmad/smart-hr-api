@@ -1,28 +1,38 @@
 import UserAccountModel from 'App/Models/Mysql/UserAccounts'
 import Hash from '@ioc:Adonis/Core/Hash'
+import { randomString } from 'App/Helpers/Utilities'
+
+type UserCode = string
 
 export default class UserService {
-  public async createNewData({
-    email,
-    firstName,
-    lastName,
-    username,
-    password,
-    companyId,
-  }): Promise<boolean> {
+  public async createNewData({ companyCode, email, username, password }): Promise<UserCode> {
     try {
       const data = {
+        code: await this.getRandomCode(), // tipe: string -> membuat random code
+        companyCode,
         email,
-        firstName,
-        lastName,
-        companyId,
         username,
         password,
-        codeVerification: this.getCodeVerification(),
-      }
-      data.password = await this.hashPassword(password)
-      await UserAccountModel.create(data)
-      return true
+      } // memasukkan kedalam data semua value diparameter
+      data.password = await this.hashPassword(password) // tipe: promise<string> -> menjadikan hash password
+      const res = await UserAccountModel.create(data) // membuat data user dan dimasukkan kedalam variabel res
+      const userCode: string = res.toJSON().code // mengambil usercode dari object data.code
+      return userCode // mengembalikan user code
+    } catch (err) {
+      throw err
+    }
+  }
+
+  private async getRandomCode(): Promise<string> {
+    try {
+      let code = randomString(3, { alphabetPre: true })
+      let isExists = true
+      do {
+        const res = await UserAccountModel.findBy('code', code)
+        if (!res) isExists = false
+        else code = randomString(3, { alphabetPre: true })
+      } while (isExists)
+      return code
     } catch (err) {
       throw err
     }
@@ -69,8 +79,13 @@ export default class UserService {
     }
   }
 
-  private getCodeVerification(min: number = 1000, max: number = 9999): string {
-    return Math.floor(Math.random() * (max - min + 1) + min).toString()
+  public async deleteUser(userCode: string) {
+    try {
+      const data = await UserAccountModel.findByOrFail('code', userCode)
+      await data.delete()
+    } catch (err) {
+      throw err
+    }
   }
 
   private async hashPassword(password: string): Promise<string> {

@@ -5,20 +5,11 @@ export default class Companies extends BaseModel {
   public static table = 'companies'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'code',
+    serializeAs: 'code',
     isPrimary: true,
   })
-  public _id: number
-
-  @column({
-    columnName: 'clientId',
-    serializeAs: 'clientId',
-    serialize: (val: number) => {
-      return val || 0
-    },
-  })
-  public clientId: number
+  public code: string
 
   @column({
     columnName: 'name',
@@ -42,22 +33,10 @@ export default class Companies extends BaseModel {
   public address: string
 
   @column({
-    columnName: 'cityId',
-    serializeAs: 'cityId',
+    columnName: 'locationCode',
+    serializeAs: 'locationCode',
   })
-  public cityId: number
-
-  @column({
-    columnName: 'provinceId',
-    serializeAs: 'provinceId',
-  })
-  public provinceId: string
-
-  @column({
-    columnName: 'postalCode',
-    serializeAs: 'postalCode',
-  })
-  public postalCode: string
+  public locationCode: string
 
   @column({
     columnName: 'phoneNumber1',
@@ -86,18 +65,18 @@ export default class Companies extends BaseModel {
   @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public createdAt: DateTime
+  public createdAt: string | null
 
   @column({
     columnName: 'updatedAt',
     serializeAs: 'updatedAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public updatedAt: DateTime
+  public updatedAt: string | null
 }

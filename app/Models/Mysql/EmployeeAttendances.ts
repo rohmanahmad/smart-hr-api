@@ -12,22 +12,40 @@ export default class EmployeeAttendances extends BaseModel {
   public _id: number
 
   @column({
-    columnName: 'companyId',
-    serializeAs: 'companyId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'companyCode',
+    serializeAs: 'companyCode',
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public companyId: number
+  public companyCode: string
 
   @column({
-    columnName: 'employeeId',
-    serializeAs: 'employeeId',
-    serialize: (val: number) => {
-      return val || 0
+    columnName: 'employeeCode',
+    serializeAs: 'employeeCode',
+    serialize: (val: string) => {
+      return val || ''
     },
   })
-  public employeeId: number
+  public employeeCode: string
+
+  @column({
+    columnName: 'shiftCode',
+    serializeAs: 'shiftCode',
+    serialize: (val: string) => {
+      return val || ''
+    },
+  })
+  public shiftCode: string
+
+  @column({
+    columnName: 'clockType',
+    serializeAs: 'clockType',
+    serialize: (val: string) => {
+      return val || ''
+    },
+  })
+  public clockType: string
 
   @column({
     columnName: 'date',
@@ -51,38 +69,47 @@ export default class EmployeeAttendances extends BaseModel {
   public clockOutAt: string
 
   @column({
-    columnName: 'description',
-    serializeAs: 'description',
+    columnName: 'locationCoordinate',
+    serializeAs: 'locationCoordinate',
   })
-  public description: string
+  public locationCoordinate: string
 
   @column({
-    columnName: 'emmployeeNotes',
-    serializeAs: 'emmployeeNotes',
+    columnName: 'status',
+    serializeAs: 'status',
   })
-  public emmployeeNotes: string
+  public status: string
+
+  @column({
+    columnName: 'note',
+    serializeAs: 'note',
+  })
+  public note: string
 
   @column({
     columnName: 'isApproved',
     serializeAs: 'isApproved',
+    serialize: (value: number) => {
+      return value > 0
+    },
   })
   public isApproved: boolean
 
   @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public createdAt: DateTime
+  public createdAt: string | null
 
   @column({
     columnName: 'updatedAt',
     serializeAs: 'updatedAt',
-    serialize: (val: DateTime) => {
-      return val || ''
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public updatedAt: DateTime
+  public updatedAt: string | null
 }
