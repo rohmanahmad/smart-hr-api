@@ -23,8 +23,8 @@ export default class extends BaseSchema {
       table.string('phoneNumber2', 20).nullable().comment('Optional')
       table.string('email', 100).nullable().comment('optional')
       table.string('website', 100).nullable().comment('optional')
-      table.timestamp('createdAt', { useTz: true })
-      table.dateTime('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.dateTime('updatedAt', { useTz: true }).nullable()
     })
   }
 

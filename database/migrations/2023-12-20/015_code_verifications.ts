@@ -12,9 +12,10 @@ export default class extends BaseSchema {
         .references('user_accounts.code')
         .comment('Ref: user_accounts.code')
       table.string('codeType', 20).comment('registration, forgot_password, others')
-      table.datetime('ttl', { useTz: true })
-      table.timestamp('createdAt', { useTz: true })
-      table.dateTime('updatedAt', { useTz: true })
+      table.boolean('trash').notNullable().defaultTo(false)
+      table.datetime('ttl', { useTz: true }).notNullable()
+      table.timestamp('createdAt', { useTz: true }).notNullable().defaultTo(this.now())
+      table.dateTime('updatedAt', { useTz: true }).nullable()
     })
   }
 

@@ -18,8 +18,8 @@ export default class extends BaseSchema {
         .notNullable()
         .references('user_accounts.code')
         .comment('Ref: user_accounts.code')
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

@@ -20,8 +20,8 @@ export default class extends BaseSchema {
       table.integer('salary').nullable()
       table.string('jobPosition', 30).nullable()
       table.datetime('hireDate').nullable()
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

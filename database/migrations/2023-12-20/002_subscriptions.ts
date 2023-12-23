@@ -10,8 +10,8 @@ export default class extends BaseSchema {
       table.string('name', 20).unique().notNullable()
       table.string('description', 255).nullable()
       table.string('price', 20).nullable()
-      table.timestamp('createdAt', { useTz: true })
-      table.dateTime('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.dateTime('updatedAt', { useTz: true }).nullable()
     })
   }
 

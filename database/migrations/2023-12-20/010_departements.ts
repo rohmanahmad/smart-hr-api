@@ -9,8 +9,8 @@ export default class extends BaseSchema {
       table.string('code', 3).unique().primary()
       table.string('companyCode', 3).notNullable().references('companies.code')
       table.string('name', 30).notNullable()
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

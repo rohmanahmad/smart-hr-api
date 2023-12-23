@@ -1,5 +1,6 @@
 import { DateTimeNowISO, DateUTC, randomString } from 'App/Helpers/Utilities'
 import CodeVerifications from 'App/Models/Mysql/CodeVerifications'
+import { CodeVerificationsInterface } from 'App/Interfaces/MysqlModels'
 
 type VerificationCode = string
 
@@ -15,7 +16,7 @@ export default class CodeVerificationsService {
         isExists = await this.checkCodeExists(vc)
         if (isExists) vc = this.getCode()
       } while (isExists)
-      const data = {
+      const data: CodeVerificationsInterface = {
         userCode,
         codeType: type,
         code: vc,

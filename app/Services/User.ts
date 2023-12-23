@@ -1,18 +1,23 @@
 import UserAccountModel from 'App/Models/Mysql/UserAccounts'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { randomString } from 'App/Helpers/Utilities'
+import { randomString, DateTimeNowISO } from 'App/Helpers/Utilities'
+import { UserAccountsInterface } from 'App/Interfaces/MysqlModels'
 
 type UserCode = string
 
 export default class UserService {
   public async createNewData({ companyCode, email, username, password }): Promise<UserCode> {
     try {
-      const data = {
+      const data: UserAccountsInterface = {
         code: await this.getRandomCode(), // tipe: string -> membuat random code
         companyCode,
         email,
         username,
         password,
+        createdAt: DateTimeNowISO(),
+        status: 'pending-confirmation',
+        permissionType: 'basic-user',
+        trashStatus: false,
       } // memasukkan kedalam data semua value diparameter
       data.password = await this.hashPassword(password) // tipe: promise<string> -> menjadikan hash password
       const res = await UserAccountModel.create(data) // membuat data user dan dimasukkan kedalam variabel res
@@ -22,7 +27,7 @@ export default class UserService {
       throw err
     }
   }
-  
+
   private async checkIfExists(code: string): Promise<boolean> {
     const data = await UserAccountModel.findBy('code', code)
     if (data) return true // code already exists

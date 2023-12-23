@@ -1,4 +1,5 @@
-import { randomString } from 'App/Helpers/Utilities'
+import { randomString, DateTimeNowISO } from 'App/Helpers/Utilities'
+import { CompaniesInterface } from 'App/Interfaces/MysqlModels'
 import CompaniesModel from 'App/Models/Mysql/Companies'
 
 type CompanyCode = string
@@ -6,7 +7,7 @@ type CompanyCode = string
 export default class CompanyService {
   public async createNewCompany(companyName: string): Promise<CompanyCode> {
     try {
-      const data = {
+      const data: CompaniesInterface = {
         code: await this.getRandomCode(),
         name: companyName,
         // description: null,
@@ -18,6 +19,7 @@ export default class CompanyService {
         // phoneNumber2: null,
         // email: null,
         // website: null,
+        createdAt: DateTimeNowISO(),
         // updatedAt: null,
       }
       const res = await CompaniesModel.create(data)

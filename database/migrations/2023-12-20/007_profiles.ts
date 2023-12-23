@@ -19,8 +19,8 @@ export default class extends BaseSchema {
       table.string('locationCode', 30).nullable().references('locations.code').comment('optional')
       table.string('birthDate', 20).nullable().comment('optional')
       table.string('gender', 20).nullable().comment('optional')
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.increments('_id').primary()
       table.string('departementCode', 3).notNullable().references('departements.code')
       table.string('employeeCode', 8).notNullable().references('employees.code')
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

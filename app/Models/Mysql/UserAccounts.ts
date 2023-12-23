@@ -44,13 +44,13 @@ export default class UserAccounts extends BaseModel {
   public password: string
 
   @column({
-    columnName: 'permisionType',
-    serializeAs: 'permisionType',
+    columnName: 'permissionType',
+    serializeAs: 'permissionType',
     serialize: (val: string) => {
       return val || 'basic-user'
     },
   })
-  public permisionType: string
+  public permissionType: string
 
   @column({
     columnName: 'status',
@@ -71,20 +71,8 @@ export default class UserAccounts extends BaseModel {
   @column({
     columnName: 'trashStatus',
     serializeAs: 'trashStatus',
-    serialize: (val: string) => {
-      return val || ''
-    },
   })
-  public trashStatus: string
-
-  @column({
-    columnName: 'codeVerification',
-    serializeAs: 'codeVerification',
-    serialize: (val: string) => {
-      return val || ''
-    },
-  })
-  public codeVerification: string
+  public trashStatus: boolean
 
   @column({
     columnName: 'createdAt',
