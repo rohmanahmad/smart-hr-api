@@ -61,10 +61,10 @@ export default class UserAccountRegistrationController {
       rollbackData.profileCode = profileCode // memasukkan data dalam variabel rollbackdata dengan key "profilecode" dan value bertipedata: string
       const userCode = await this.createUserAccount({ companyCode, email, username, password }) // tipe Promise<string> -> mendapatkan usercode dari tabel userAccount berdasarkan companycode email username dan password
       rollbackData.userCode = userCode // memasukkan data dalam variabel rollbackdata dengan key "usercode" dan value bertipedata: string
-      const relationId = await this.createRelationClientAdmin({ userCode, clientCode }) // tipe Promise<number> -> mendapatkan relationid dari tabel clientadmin berdasarkan usercode dan cliencode
+      const relationId = await this.createRelationClientAdmin({ userCode, clientCode, companyCode }) // tipe Promise<number> -> mendapatkan relationid dari tabel clientadmin berdasarkan usercode dan cliencode
       rollbackData.relationId = relationId // memasukkan data dalam variabel rollbackdata dengan key "relationid" dan value bertipedata: number
       await this.createCodeVerification(userCode) // tipe Promise<void> -> membuat kode verifikasi
-      return true //
+      return true
     } catch (err) {
       await this.rollbackDataToDefault(rollbackData) // jika eror kembalikan data ke default
       throw err
@@ -137,10 +137,10 @@ export default class UserAccountRegistrationController {
     }
   }
 
-  private async createRelationClientAdmin({ userCode, clientCode }): Promise<number> {
+  private async createRelationClientAdmin({ userCode, clientCode, companyCode }): Promise<number> {
     try {
       const cs = new ClientService()
-      const relationId = await cs.createRelationAdminClient({ userCode, clientCode })
+      const relationId = await cs.createRelationAdminClient({ userCode, clientCode, companyCode })
       return relationId
     } catch (err) {
       throw err

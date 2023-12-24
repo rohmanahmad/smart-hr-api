@@ -17,6 +17,7 @@ export type ClientAdminInterface = {
   id?: number
   clientCode: string
   userCode: string
+  companyCode: string
   createdAt: string | null
   updatedAt?: string | null
 }

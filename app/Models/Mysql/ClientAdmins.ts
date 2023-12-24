@@ -27,6 +27,12 @@ export default class ClientAdmins extends BaseModel {
   public userCode: string
 
   @column({
+    columnName: 'companyCode',
+    serializeAs: 'companyCode',
+  })
+  public companyCode: string
+
+  @column({
     columnName: 'createdAt',
     serializeAs: 'createdAt',
     serialize: (val: string) => {
