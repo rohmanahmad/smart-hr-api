@@ -3,6 +3,7 @@ import Event from '@ioc:Adonis/Core/Event'
 import moment from 'moment'
 import Hash from '@ioc:Adonis/Core/Hash'
 import UserService from 'App/Services/User'
+import Clients from 'App/Services/Clients'
 
 interface ReponseInterface {
   id: number
@@ -16,7 +17,9 @@ export default class AuthenticationLoginController {
     try {
       const { username, password } = request.body()
       if (!username || !password) throw new Error('Invalid Username Or Password')
-      const userData = await this.gettingUserFromUsernameAndPassword(username, password)
+      const userData = await this.validateUsernameAndPassword(username, password)
+      const clientData = await this.getClientAdminInformation(userData.code)
+      const companyData = await this.getCompanyInformation()
       await this.updateLastLogin(username)
       const jwtAuth = await auth
         .use('api')
@@ -37,9 +40,31 @@ export default class AuthenticationLoginController {
     }
   }
 
-  protected async gettingUserFromUsernameAndPassword(username: string, password: string) {
+  private async getClientAdminInformation(userCode: string): Promise<object | null> {
     try {
-      const data = await new UserService().getInfoFromActiveUser(username)
+      const ca = new Clients()
+
+      return null
+    } catch (err) {
+      throw err
+    }
+  }
+
+  protected async validateUsernameAndPassword(username: string, password: string) {
+    try {
+      const us = new UserService()
+      const data = await us.getUserByUsername(username)
+      if (!data) throw new Error('Invalid Username Or Password')
+      if (data.status !== 'active') {
+        switch (data.status) {
+          case 'pending-confirmation':
+            throw new Error('Account Need To Be Confirmation')
+          case 'blocked':
+            throw new Error('Account Was Blocked')
+          case 'suspend':
+            throw new Error('Account Suspended')
+        }
+      }
       const passwordFromDB = data?.password
       if (!(await Hash.use('md5').verify(passwordFromDB, password)))
         throw new Error('Invalid Username Or password')

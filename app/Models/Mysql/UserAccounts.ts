@@ -59,7 +59,7 @@ export default class UserAccounts extends BaseModel {
       /* 
       available status:
         - active
-        - inactive
+        - blocked
         - pending-confirmation
         - suspend
       */
