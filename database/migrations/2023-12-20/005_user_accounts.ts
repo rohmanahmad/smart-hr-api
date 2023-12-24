@@ -12,6 +12,7 @@ export default class extends BaseSchema {
         .notNullable()
         .references('companies.code')
         .comment('Ref: companies.code')
+      table.string('token_expired', 10).notNullable().defaultTo('1d')
       table.string('username', 20).notNullable().unique()
       table.string('email', 100).notNullable().unique()
       table.text('password').notNullable().comment('Hashed Value')

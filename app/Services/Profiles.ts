@@ -1,4 +1,5 @@
-import { DateTimeNowISO, randomString } from 'App/Helpers/Utilities'
+import { DateTimeNowISO } from 'App/Helpers/Date'
+import { randomString } from 'App/Helpers/Utilities'
 import { ProfilesInterface } from 'App/Interfaces/MysqlModels'
 import ProfileModel from 'App/Models/Mysql/Profiles'
 

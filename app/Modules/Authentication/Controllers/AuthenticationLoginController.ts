@@ -19,7 +19,7 @@ export default class AuthenticationLoginController {
       if (!username || !password) throw new Error('Invalid Username Or Password')
       const userData = await this.validateUsernameAndPassword(username, password)
       const clientData = await this.getClientAdminInformation(userData.code)
-      const companyData = await this.getCompanyInformation()
+      const companyData = await this.getCompanyInformation(userData.companyCode)
       await this.updateLastLogin(username)
       const jwtAuth = await auth
         .use('api')
@@ -38,6 +38,10 @@ export default class AuthenticationLoginController {
     } catch (err) {
       response.apiError(err)
     }
+  }
+
+  private async getCompanyInformation(companyCode: string): Promise<object> {
+    return {}
   }
 
   private async getClientAdminInformation(userCode: string): Promise<object | null> {

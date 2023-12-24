@@ -1,6 +1,7 @@
-import { DateTimeNowISO, DateUTC, randomString } from 'App/Helpers/Utilities'
+import { randomString } from 'App/Helpers/Utilities'
 import CodeVerifications from 'App/Models/Mysql/CodeVerifications'
 import { CodeVerificationsInterface } from 'App/Interfaces/MysqlModels'
+import { DateTimeNowISO, DateUTC } from 'App/Helpers/Date'
 
 type VerificationCode = string
 

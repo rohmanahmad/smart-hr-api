@@ -1,27 +1,13 @@
-import { DateTime } from 'luxon'
 import Config from '@ioc:Adonis/Core/Config'
 const channelItems = Config.get('streams.channel_items', [])
 import { ServiceCategories } from 'App/Interfaces/Channels'
 import { ServiceObject } from 'App/Interfaces'
-
-export const DateTimeNowISO = function (): string | null {
-  return DateTime.utc().toSQLDate()
-}
-
-export const DateUTC = function () {
-  return DateTime.utc()
-}
 
 export const ProjectSplitter = function (project: string): Array<number> {
   return project
     .split(',')
     .map((x) => parseInt(x))
     .filter((x) => x > 0)
-}
-
-export const DateTimeBuilder = function (dateFormat: string, timeFormat: string = '00:00'): Date {
-  const isoFormatted = [dateFormat, timeFormat].join(' ')
-  return DateTime.fromFormat(isoFormatted, 'yyyy-LL-dd hh:mm:ss').toJSDate()
 }
 
 export const StringToArrayInt = function (str: string, delimiter: string = ','): Array<number> {

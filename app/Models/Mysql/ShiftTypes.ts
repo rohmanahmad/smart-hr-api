@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class ShiftTypes extends BaseModel {
-  public static table = 'shiftTypes'
+  public static table = 'shift_types'
 
   @column({
     columnName: 'code',

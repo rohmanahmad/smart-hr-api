@@ -14,9 +14,18 @@
       "outputCapture": "std"
     },
     {
-      "name": "Launch Migration",
+      "name": "Launch Migration Fresh",
       "request": "launch",
       "runtimeArgs": ["ace", "migration:fresh"],
+      "runtimeExecutable": "/Users/ivo/.nvm/versions/node/v20.10.0/bin/node",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "outputCapture": "std"
+    },
+    {
+      "name": "Launch Migration Run",
+      "request": "launch",
+      "runtimeArgs": ["ace", "migration:run"],
       "runtimeExecutable": "/Users/ivo/.nvm/versions/node/v20.10.0/bin/node",
       "skipFiles": ["<node_internals>/**"],
       "type": "node",

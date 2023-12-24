@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class UserActivities extends BaseModel {
-  public static table = 'user_activities'
+export default class UserTokens extends BaseModel {
+  public static table = 'user_tokens'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'id',
+    serializeAs: 'id',
     isPrimary: true,
   })
   public _id: number
@@ -21,22 +21,16 @@ export default class UserActivities extends BaseModel {
   public userCode: string
 
   @column({
-    columnName: 'date',
-    serializeAs: 'date',
+    columnName: 'token',
+    serializeAs: 'token',
   })
-  public date: DateTime
+  public token: string
 
   @column({
-    columnName: 'type',
-    serializeAs: 'type',
+    columnName: 'ttl',
+    serializeAs: 'ttl',
   })
-  public type: string
-
-  @column({
-    columnName: 'detail',
-    serializeAs: 'detail',
-  })
-  public detail: string
+  public ttl: DateTime
 
   @column({
     columnName: 'createdAt',

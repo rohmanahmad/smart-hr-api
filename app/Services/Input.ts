@@ -2,11 +2,11 @@ import uniq from 'lodash.uniq'
 import { ValidInput, AvailableInput } from 'App/Interfaces/Inputs'
 import {
   ProjectSplitter,
-  DateTimeBuilder,
   StringToArrayInt,
   StringToArrayString,
   MapServiceCategory,
 } from 'App/Helpers/Utilities'
+import { DateTimeBuilder } from 'App/Helpers/Date'
 
 export default class Input {
   public input: AvailableInput

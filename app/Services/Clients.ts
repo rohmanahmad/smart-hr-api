@@ -1,21 +1,22 @@
 import ClientModel from 'App/Models/Mysql/Clients'
 import ClientAdmins from 'App/Models/Mysql/ClientAdmins'
-import { DateTimeNowISO, randomString } from 'App/Helpers/Utilities'
+import { randomString } from 'App/Helpers/Utilities'
 import { ClientAdminInterface, ClientsInterface } from 'App/Interfaces/MysqlModels'
 import Logger from '@ioc:Adonis/Core/Logger'
+import { DateTimeNowISO } from 'App/Helpers/Date'
 
 type ClientCode = string
 type IndexId = number
 
-class PrivateClientService {
-  protected async checkIfExists(code: string): Promise<boolean> {
+export default class ClientServie {
+  private async checkIfExists(code: string): Promise<boolean> {
     Logger.info('Check is-Existing Client Before Creating New Client: %s', code)
     const data = await ClientModel.findBy('code', code)
     if (data) return true // code already exists
     return false
   }
 
-  protected async getRandomCode(): Promise<string> {
+  private async getRandomCode(): Promise<string> {
     Logger.info('Generating Code For New Client')
     let code = randomString(3, { alphabetPre: true })
     // check if exists by code
@@ -27,7 +28,7 @@ class PrivateClientService {
     return code
   }
 
-  protected getRandomName(): string {
+  private getRandomName(): string {
     /* 
     role:
     - total of characters are 10
@@ -35,12 +36,6 @@ class PrivateClientService {
     - starts with alphabet
     */
     return randomString(10, { alphabetPre: true })
-  }
-}
-
-export default class ClientServie extends PrivateClientService {
-  constructor() {
-    super()
   }
   public async createNewClient(): Promise<ClientCode> {
     try {

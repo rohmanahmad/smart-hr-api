@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class EmployeeAttendances extends BaseModel {
-  public static table = 'employeeAttendances'
+  public static table = 'employee_attendances'
 
   @column({
     columnName: '_id',
@@ -19,6 +19,15 @@ export default class EmployeeAttendances extends BaseModel {
     },
   })
   public companyCode: string
+
+  @column({
+    columnName: 'permitCode',
+    serializeAs: 'permitCode',
+    serialize: (val: string) => {
+      return val || ''
+    },
+  })
+  public permitCode: string
 
   @column({
     columnName: 'employeeCode',
