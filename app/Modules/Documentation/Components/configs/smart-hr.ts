@@ -23,6 +23,7 @@ const config = {
     'app/Modules/UserAccounts/**/*.yml',
     'app/Modules/Employee/**/*.yml',
     'app/Modules/Clients/**/*.yml',
+    'app/Modules/Companies/**/*.yml',
   ],
   basePath: '/',
 }
