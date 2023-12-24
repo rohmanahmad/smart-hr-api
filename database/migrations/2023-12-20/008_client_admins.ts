@@ -6,6 +6,7 @@ export default class extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
+      table.string('companyCode', 3).notNullable().references('companies.code')
       table
         .string('clientCode', 3)
         .unique()
@@ -18,8 +19,8 @@ export default class extends BaseSchema {
         .notNullable()
         .references('user_accounts.code')
         .comment('Ref: user_accounts.code')
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

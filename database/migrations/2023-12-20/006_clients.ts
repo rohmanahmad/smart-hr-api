@@ -17,7 +17,7 @@ export default class extends BaseSchema {
         .nullable()
         .references('subscriptions.code')
         .comment('Ref: subscriptions table')
-      table.timestamp('createdAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
       table.dateTime('updatedAt', { useTz: true }).nullable()
     })
   }

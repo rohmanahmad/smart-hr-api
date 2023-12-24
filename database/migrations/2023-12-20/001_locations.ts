@@ -33,8 +33,8 @@ export default class extends BaseSchema {
         .nullable()
         .references('locations.code')
         .comment('optional')
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

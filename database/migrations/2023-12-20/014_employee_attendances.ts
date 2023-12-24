@@ -19,8 +19,8 @@ export default class extends BaseSchema {
         .nullable()
         .comment('diisi oleh karyawan yg bersangkutan saat absen dilakukan')
       table.boolean('isAproved').notNullable().defaultTo(false)
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

@@ -1,6 +1,7 @@
 import ClientModel from 'App/Models/Mysql/Clients'
 import ClientAdmins from 'App/Models/Mysql/ClientAdmins'
 import { DateTimeNowISO, randomString } from 'App/Helpers/Utilities'
+import { ClientAdminInterface, ClientsInterface } from 'App/Interfaces/MysqlModels'
 
 type ClientCode = string
 type IndexId = number
@@ -8,11 +9,12 @@ type IndexId = number
 export default class ClientServie {
   public async createNewClient(): Promise<ClientCode> {
     try {
-      const data = {
+      const data: ClientsInterface = {
         // _id: null,
         code: await this.getRandomCode(),
         name: this.getRandomName(),
         // subscriptionId: null,
+        createdAt: DateTimeNowISO(),
         // updatedAt: null,
       }
       const res = await ClientModel.create(data)
@@ -25,11 +27,12 @@ export default class ClientServie {
 
   public async createRelationAdminClient({ clientCode, userCode }): Promise<IndexId> {
     try {
-      const q = await ClientAdmins.create({
+      const data: ClientAdminInterface = {
         clientCode,
         userCode,
         createdAt: DateTimeNowISO(),
-      })
+      }
+      const q = await ClientAdmins.create(data)
       const id: number = q.toJSON().id
       return id
     } catch (err) {

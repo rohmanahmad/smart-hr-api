@@ -10,8 +10,8 @@ export default class extends BaseSchema {
       table.string('feature', 255).notNullable()
       table.string('status', 20).notNullable()
       table.integer('sortIndex').notNullable().defaultTo(0)
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 

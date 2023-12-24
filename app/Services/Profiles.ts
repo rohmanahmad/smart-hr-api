@@ -1,4 +1,5 @@
 import { DateTimeNowISO, randomString } from 'App/Helpers/Utilities'
+import { ProfilesInterface } from 'App/Interfaces/MysqlModels'
 import ProfileModel from 'App/Models/Mysql/Profiles'
 
 type ProfileCode = string
@@ -6,7 +7,7 @@ type ProfileCode = string
 export default class Profiles {
   public async createProfile({ firstName, lastName }): Promise<ProfileCode> {
     try {
-      const data = {
+      const data: ProfilesInterface = {
         code: await this.getRandomCode(),
         firstName,
         lastName,

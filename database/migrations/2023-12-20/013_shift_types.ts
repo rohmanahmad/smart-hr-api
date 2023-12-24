@@ -12,8 +12,8 @@ export default class extends BaseSchema {
       table.string('description', 255).nullable()
       table.time('clockIn').notNullable()
       table.time('clockOut').notNullable()
-      table.timestamp('createdAt', { useTz: true })
-      table.timestamp('updatedAt', { useTz: true })
+      table.timestamp('createdAt', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updatedAt', { useTz: true }).nullable()
     })
   }
 
