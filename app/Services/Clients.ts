@@ -84,4 +84,14 @@ export default class ClientServie {
     */
     return randomString(10, { alphabetPre: true })
   }
+
+  public async getClientInfoByCode(clientCode): Promise<object> {
+    try {
+      const q = await ClientModel.findBy('code', clientCode)
+      const data = q?.toJSON()
+      return data || {}
+    } catch (err) {
+      throw err
+    }
+  }
 }
