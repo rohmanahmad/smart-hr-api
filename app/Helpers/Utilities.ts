@@ -5,7 +5,7 @@ import { ServiceCategories } from 'App/Interfaces/Channels'
 import { ServiceObject } from 'App/Interfaces'
 
 export const DateTimeNowISO = function (): string | null {
-  return DateTime.utc().toSQLDate()
+  return DateTime.now().toFormat('yyyy-LL-dd HH:mm:ss')
 }
 
 export const DateUTC = function () {
