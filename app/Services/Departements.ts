@@ -57,4 +57,30 @@ export default class DepartementService {
       throw err
     }
   }
+
+  public async deleteDepartementByCode(code: string): Promise<boolean> {
+    try {
+      const q = await Departements.findBy('code', code)
+      await q?.delete()
+      return true
+    } catch (err) {
+      throw err
+    }
+  }
+
+  public async departementList(): Promise<Array<DepartementsInterface>> {
+    const q = await Departements.all({})
+    const data = q?.map((x) => x.toJSON()) as Array<DepartementsInterface>
+    return data
+  }
+
+  public async getDepartementInfo(code: string): Promise<object> {
+    try {
+      const q = await Departements.findBy('code', code)
+      const data = q?.toJSON()
+      return data || {}
+    } catch (err) {
+      throw err
+    }
+  }
 }
