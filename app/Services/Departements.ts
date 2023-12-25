@@ -41,4 +41,19 @@ export default class DepartementService {
       throw err
     }
   }
+
+  public async updateDepartementByCode(code: string, input): Promise<boolean> {
+    try {
+      const { name, description } = input
+      const q = await Departements.findByOrFail('code', code)
+      if (!q) throw new Error('invalid departement code')
+      q.name = name
+      q.description = description
+      q.updatedAt = DateTimeNowISO()
+      await q.save()
+      return true
+    } catch (err) {
+      throw err
+    }
+  }
 }

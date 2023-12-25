@@ -14,8 +14,8 @@ export default class CreateDepartementController {
 
   private async createDepartement({ companyCode, name, description }): Promise<string> {
     try {
-      const cs = new DepartementService()
-      const departementCode = await cs.createNewDepartement({ companyCode, name, description })
+      const ds = new DepartementService()
+      const departementCode = await ds.createNewDepartement({ companyCode, name, description })
       return departementCode
     } catch (err) {
       throw err
