@@ -13,7 +13,7 @@ export const DateTimeBuilder = function (dateFormat: string, timeFormat: string 
 }
 
 export const DateTimeNowISO = function (): string | null {
-  return DateTime.utc().toSQLDate()
+  return DateTime.now().toFormat('yyyy-LL-dd HH:mm:ss')
 }
 
 export const DateUTC = function (date?: Date) {

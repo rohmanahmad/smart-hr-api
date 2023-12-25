@@ -1,7 +1,8 @@
 import Logger from '@ioc:Adonis/Core/Logger'
 import { DepartementsInterface } from 'App/Interfaces/MysqlModels'
-import { DateTimeNowISO, randomString } from 'App/Helpers/Utilities'
+import { randomString } from 'App/Helpers/Utilities'
 import Departements from 'App/Models/Mysql/Departements'
+import { DateTimeNowISO } from 'App/Helpers/Date'
 
 export default class DepartementService {
   private async checkIfExists(code: string): Promise<boolean> {
