@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import CompanyService from 'App/Services/Company'
 
 export default class CompanyinfoController {
-  public async handle({ request, response, auth }: HttpContextContract): Promise<void> {
+  public async handle({ request, response }: HttpContextContract): Promise<void> {
     try {
       const { companyCode } = request.qs()
       const data = await this.getCompanyInfo(companyCode)

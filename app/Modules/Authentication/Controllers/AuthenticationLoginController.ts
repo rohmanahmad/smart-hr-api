@@ -1,10 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Event from '@ioc:Adonis/Core/Event'
-import moment from 'moment'
 import Hash from '@ioc:Adonis/Core/Hash'
 import UserService from 'App/Services/User'
 import TokenService from 'App/Services/Token'
 import UserActivitiesService from 'App/Services/UserActivities'
+import { DateTimeNowISO } from 'App/Helpers/Date'
 
 interface ReponseInterface {
   userCode: string
@@ -34,7 +34,7 @@ export default class AuthenticationLoginController {
         contents: [
           ['', 'Username: ' + username],
           ['', 'IP: ' + request.ip()],
-          ['', 'Login Date: ' + moment().format('YYYY-MM-DD HH:mm:ss')],
+          ['', 'Login Date: ' + DateTimeNowISO()],
           ['User Agent', request.header('user-agent')],
           ['Referer', request.header('referer')],
         ],

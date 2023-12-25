@@ -30,7 +30,7 @@ export default class UserTokensModel extends BaseModel {
     columnName: 'ttl',
     serializeAs: 'ttl',
   })
-  public ttl: DateTime
+  public ttl: string | null
 
   @column({
     columnName: 'createdAt',

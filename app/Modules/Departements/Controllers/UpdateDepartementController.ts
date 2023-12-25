@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import DepartementService from 'App/Services/Departements'
 
 export default class UpdateDepartementInfoController {
-  public async handle({ request, response, auth }: HttpContextContract) {
+  public async handle({ request, response }: HttpContextContract) {
     try {
       const { code } = request.body()
       await this.updateDepartementByCode(code, request.body())

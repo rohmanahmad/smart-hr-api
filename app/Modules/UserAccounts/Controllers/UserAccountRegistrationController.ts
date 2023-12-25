@@ -3,7 +3,7 @@ import UserService from 'App/Services/User'
 import CompanyService from 'App/Services/Company'
 import ClientService from 'App/Services/Clients'
 import ProfileService from 'App/Services/Profiles'
-import CodeVerificationsService from '../../../Services/CodeVerifications'
+import CodeVerificationsService from 'App/Services/CodeVerifications'
 
 type RollbackData = {
   clientCode?: string

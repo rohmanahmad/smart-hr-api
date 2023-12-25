@@ -59,11 +59,11 @@ export default class EmployeeAttendancesModel extends BaseModel {
   @column({
     columnName: 'date',
     serializeAs: 'date',
-    serialize: (val: number) => {
-      return val || 0
+    serialize: (val: string) => {
+      return DateTime.fromISO(val)
     },
   })
-  public date: DateTime
+  public date: string | null
 
   @column({
     columnName: 'clockInAt',

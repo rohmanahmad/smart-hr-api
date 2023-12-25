@@ -1,6 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Event from '@ioc:Adonis/Core/Event'
-import moment from 'moment'
 import UserService from 'App/Services/User'
 import {
   CodeVerificationsInterface,
@@ -24,7 +23,7 @@ export default class ForgotPasswordController {
         contents: [
           ['', 'email: ' + email],
           ['', 'IP: ' + request.ip()],
-          ['', 'Login Date: ' + moment().format('YYYY-MM-DD HH:mm:ss')],
+          ['', 'Login Date: ' + DateTimeNowISO()],
           ['User Agent', request.header('user-agent')],
           ['Referer', request.header('referer')],
         ],

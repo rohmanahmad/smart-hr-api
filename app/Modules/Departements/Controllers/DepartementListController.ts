@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import DepartementService from 'App/Services/Departements'
 
 export default class DepartementListController {
-  public async handle({ request, response, auth }: HttpContextContract) {
+  public async handle({ response }: HttpContextContract) {
     try {
       const data = await this.departementList()
       response.apiCollection({ data })

@@ -1,10 +1,9 @@
 import UserAccountModel from 'App/Models/Mysql/UserAccounts'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { randomString } from 'App/Helpers/Utilities'
-import { UserAccountsInterface, CodeVerificationsInterface } from 'App/Interfaces/MysqlModels'
+import { UserAccountsInterface } from 'App/Interfaces/MysqlModels'
 import Logger from '@ioc:Adonis/Core/Logger'
 import { DateTimeNowISO } from 'App/Helpers/Date'
-import CodeVerifications from 'App/Models/Mysql/CodeVerifications'
 
 type UserCode = string
 interface NewData

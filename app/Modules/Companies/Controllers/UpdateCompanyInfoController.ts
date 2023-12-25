@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import CompanyService from 'App/Services/Company'
 
 export default class UpdateCompanyInfoController {
-  public async handle({ request, response, auth }: HttpContextContract) {
+  public async handle({ request, response }: HttpContextContract) {
     try {
       const { code } = request.body()
       await this.updateCompanyByCode(code, request.body())
