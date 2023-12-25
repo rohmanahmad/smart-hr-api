@@ -5,8 +5,8 @@ export default class SubscriptionFeatures extends BaseModel {
   public static table = 'subscription_features'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'id',
+    serializeAs: 'id',
     isPrimary: true,
   })
   public _id: number

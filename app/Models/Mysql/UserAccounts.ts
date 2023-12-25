@@ -50,7 +50,7 @@ export default class UserAccounts extends BaseModel {
       return val || 'basic-user'
     },
   })
-  public permissionType: string
+  public permissionType: 'basic-user' | 'employee' | 'manager' | 'other'
 
   @column({
     columnName: 'status',
@@ -66,7 +66,7 @@ export default class UserAccounts extends BaseModel {
       return val || 'pending-confirmation'
     },
   })
-  public status: string
+  public status: 'active' | 'blocked' | 'pending-confirmation' | 'suspend'
 
   @column({
     columnName: 'trashStatus',

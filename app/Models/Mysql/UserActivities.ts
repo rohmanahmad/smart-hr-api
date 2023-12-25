@@ -5,8 +5,8 @@ export default class UserActivities extends BaseModel {
   public static table = 'user_activities'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'id',
+    serializeAs: 'id',
     isPrimary: true,
   })
   public _id: number
@@ -24,7 +24,7 @@ export default class UserActivities extends BaseModel {
     columnName: 'date',
     serializeAs: 'date',
   })
-  public date: DateTime
+  public date: string | null
 
   @column({
     columnName: 'type',

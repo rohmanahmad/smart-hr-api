@@ -3,11 +3,11 @@ import Event from '@ioc:Adonis/Core/Event'
 import moment from 'moment'
 import Hash from '@ioc:Adonis/Core/Hash'
 import UserService from 'App/Services/User'
-import Clients from 'App/Services/Clients'
+import TokenService from 'App/Services/Token'
+import UserActivitiesService from 'App/Services/UserActivities'
 
 interface ReponseInterface {
-  id: number
-  avatar: string
+  userCode: string
   token: string
   expires_token: string
 }
@@ -18,14 +18,18 @@ export default class AuthenticationLoginController {
       const { username, password } = request.body()
       if (!username || !password) throw new Error('Invalid Username Or Password')
       const userData = await this.validateUsernameAndPassword(username, password)
-      const clientData = await this.getClientAdminInformation(userData.code)
-      const companyData = await this.getCompanyInformation(userData.companyCode)
-      await this.updateLastLogin(username)
-      const jwtAuth = await auth
-        .use('api')
-        .generate(userData, { expiresIn: userData.tokenExpired || '1d' })
-      const mapData = this.mapDataForResponse({ ...userData, jwtAuth })
+      // const clientData = await this.getClientAdminInformation(userData.code)
+      // const companyData = await this.getCompanyInformation(userData.companyCode)
+      const jwtAuth = await auth.use('api').generate(userData, { expiresIn: '1d' })
+      const mapData = this.mapDataForResponse({
+        user: userData,
+        jwt: jwtAuth,
+        // client: clientData,
+        // company: companyData,
+      })
       response.apiCollection(mapData)
+      await this.createActivityLog(userData.code)
+      await this.saveTokenData(userData, jwtAuth)
       Event.emit('user:login', {
         contents: [
           ['', 'Username: ' + username],
@@ -40,18 +44,9 @@ export default class AuthenticationLoginController {
     }
   }
 
-  private async getCompanyInformation(companyCode: string): Promise<object> {
-    return {}
-  }
-
-  private async getClientAdminInformation(userCode: string): Promise<object | null> {
-    try {
-      const ca = new Clients()
-
-      return null
-    } catch (err) {
-      throw err
-    }
+  private async saveTokenData(userData, jwtAuth) {
+    const token = new TokenService()
+    await token.createToken(userData, jwtAuth)
   }
 
   protected async validateUsernameAndPassword(username: string, password: string) {
@@ -60,14 +55,7 @@ export default class AuthenticationLoginController {
       const data = await us.getUserByUsername(username)
       if (!data) throw new Error('Invalid Username Or Password')
       if (data.status !== 'active') {
-        switch (data.status) {
-          case 'pending-confirmation':
-            throw new Error('Account Need To Be Confirmation')
-          case 'blocked':
-            throw new Error('Account Was Blocked')
-          case 'suspend':
-            throw new Error('Account Suspended')
-        }
+        us.validateStatus(data.status)
       }
       const passwordFromDB = data?.password
       if (!(await Hash.use('md5').verify(passwordFromDB, password)))
@@ -78,19 +66,19 @@ export default class AuthenticationLoginController {
     }
   }
 
-  protected async updateLastLogin(username: string): Promise<void> {
+  protected async createActivityLog(userCode: string): Promise<void> {
     try {
-      await new UserService().updateLastLoginByUsername(username)
+      const uac = new UserActivitiesService()
+      await uac.createActivity('login', userCode, '{}')
     } catch (err) {
       throw err
     }
   }
   protected mapDataForResponse(data: any): ReponseInterface {
     const objectResponse = {} as ReponseInterface
-    objectResponse.id = data.userData?.userId
-    objectResponse.avatar = data.userData?.userPhoto || 'no-image.png'
-    objectResponse.token = data.jwtAuth?.token
-    objectResponse.expires_token = data.jwtAuth?.expiresIn
+    objectResponse.userCode = data.user?.userCode
+    objectResponse.token = data.jwt?.token
+    objectResponse.expires_token = data.jwt?.expiresIn
 
     return objectResponse
   }

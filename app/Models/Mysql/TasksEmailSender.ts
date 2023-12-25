@@ -9,7 +9,7 @@ export default class TaskEmailSender extends BaseModel {
     serializeAs: 'id',
     isPrimary: true,
   })
-  public id: number
+  public id: number | null
 
   @column({
     columnName: 'uuid',
@@ -18,7 +18,7 @@ export default class TaskEmailSender extends BaseModel {
       return val || ''
     },
   })
-  public uuid: string
+  public uuid: string | null
 
   @column({
     columnName: 'isHTML',

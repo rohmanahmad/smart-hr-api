@@ -1,9 +1,10 @@
 import UserAccountModel from 'App/Models/Mysql/UserAccounts'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { randomString } from 'App/Helpers/Utilities'
-import { UserAccountsInterface } from 'App/Interfaces/MysqlModels'
+import { UserAccountsInterface, CodeVerificationsInterface } from 'App/Interfaces/MysqlModels'
 import Logger from '@ioc:Adonis/Core/Logger'
 import { DateTimeNowISO } from 'App/Helpers/Date'
+import CodeVerifications from 'App/Models/Mysql/CodeVerifications'
 
 type UserCode = string
 
@@ -128,14 +129,35 @@ export default class UserService {
     }
   }
 
-  public async getUserByUsername(username: string): Promise<UserAccountsInterface> {
+  public async getUserByUsername(username: string): Promise<UserAccountModel> {
     try {
       Logger.info('Getting User Account by Username: %o', { username })
-      const q = await UserAccountModel.findBy('username', username)
-      const data = q?.toJSON() as unknown as UserAccountModel
-      return data
+      const q = await UserAccountModel.findByOrFail('username', username)
+      return q
     } catch (err) {
       throw err
+    }
+  }
+
+  public async getUserByEmail(email: string): Promise<UserAccountsInterface> {
+    try {
+      const q = await UserAccountModel.findBy('email', email)
+      if (!q) throw new Error('Email Not Found')
+      const item = q.toJSON() as UserAccountsInterface
+      return item
+    } catch (err) {
+      throw err
+    }
+  }
+
+  public validateStatus(status: string) {
+    switch (status) {
+      case 'pending-confirmation':
+        throw new Error('Account Need To Be Confirmation')
+      case 'blocked':
+        throw new Error('Account Was Blocked')
+      case 'suspend':
+        throw new Error('Account Suspended')
     }
   }
 }

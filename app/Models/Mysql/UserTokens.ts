@@ -9,7 +9,7 @@ export default class UserTokens extends BaseModel {
     serializeAs: 'id',
     isPrimary: true,
   })
-  public _id: number
+  public id: number | null
 
   @column({
     columnName: 'userCode',
