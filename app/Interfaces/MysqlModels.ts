@@ -81,7 +81,8 @@ export type EmployeeAttendancesInterface = {
   clockInAt: string
   clockOutAt?: string
   locationCoordinate?: string
-  status?: string
+  status?: 'late' | 'ontime' | 'early' | 'absent' | 'sick' | 'permit'
+  permitCode: string
   note?: string
   isApproved: boolean
   createdAt: string | null
@@ -151,7 +152,7 @@ export type UserAccountsInterface = {
   username: string
   email: string
   password: string
-  permissionType: string
+  permissionType: 'basic-user' | 'employee' | 'manager' | 'other'
   status: string
   trashStatus: boolean
   createdAt: string | null
@@ -162,8 +163,25 @@ export type UserActivitiesInterface = {
   _id: number
   userCode: string
   date?: DateTime
-  type?: string
+  type?: 'login' | 'forgot-password' | 'other'
   detail?: string
   createdAt: string | null
   updatedAt?: string | null
+}
+
+export type TasksEmailSender = {
+  id: number
+  uuid: string
+  sentAsEmail: string
+  sentAsName: string
+  email: string
+  cc?: string
+  bcc?: string
+  subject: string
+  isHTML: boolean
+  status: 'pending' | 'sent' | 'cancel'
+  templateName: string
+  contentData: string
+  createdAt: string | null
+  updatedAt: string | null
 }

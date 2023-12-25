@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class SubscriptionFeatures extends BaseModel {
-  public static table = 'subscriptionFeatures'
+  public static table = 'subscription_features'
 
   @column({
     columnName: '_id',
