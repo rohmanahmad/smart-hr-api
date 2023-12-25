@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class ShiftTypes extends BaseModel {
+export default class ShiftTypesModel extends BaseModel {
   public static table = 'shift_types'
 
   @column({

@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class UserAccounts extends BaseModel {
+export default class UserAccountsModel extends BaseModel {
   public static table = 'user_accounts'
 
   @column({
@@ -50,7 +50,7 @@ export default class UserAccounts extends BaseModel {
       return val || 'basic-user'
     },
   })
-  public permissionType: string
+  public permissionType: 'basic-user' | 'employee' | 'manager' | 'other'
 
   @column({
     columnName: 'status',

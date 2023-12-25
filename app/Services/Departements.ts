@@ -74,11 +74,11 @@ export default class DepartementService {
     return data
   }
 
-  public async getDepartementInfo(code: string): Promise<object> {
+  public async getDepartementInfo(code: string): Promise<DepartementsInterface> {
     try {
       const q = await Departements.findBy('code', code)
-      const data = q?.toJSON()
-      return data || {}
+      const data = q?.toJSON() as DepartementsInterface
+      return data
     } catch (err) {
       throw err
     }
