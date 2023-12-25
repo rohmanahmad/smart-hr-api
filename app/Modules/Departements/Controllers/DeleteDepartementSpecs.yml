@@ -6,7 +6,7 @@
     summary: Delete Departement
     description: Delete departement by owned
     parameters:
-      - $ref: '#/parameters/code'
+      - $ref: '#/parameters/Code'
     responses:
       '200':
         description: Success

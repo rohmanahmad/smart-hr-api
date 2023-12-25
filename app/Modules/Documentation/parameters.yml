@@ -14,6 +14,6 @@ parameters:
   Code:
     in: query
     name: code
-    description: Code
+    description: Code for Departement
     schema:
       $ref: '#/definitions/generals/string'
