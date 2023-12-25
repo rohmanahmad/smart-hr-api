@@ -11,3 +11,9 @@ parameters:
     description: Code For company
     schema:
       $ref: '#/definitions/generals/string'
+  Code:
+    in: query
+    name: code
+    description: Code for Departement
+    schema:
+      $ref: '#/definitions/generals/string'

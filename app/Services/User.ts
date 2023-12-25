@@ -7,6 +7,31 @@ import { DateTimeNowISO } from 'App/Helpers/Date'
 import CodeVerifications from 'App/Models/Mysql/CodeVerifications'
 
 type UserCode = string
+interface NewData
+  extends Omit<
+    UserAccountsInterface,
+    | 'code'
+    | 'companyCode'
+    | 'username'
+    | 'email'
+    | 'password'
+    | 'permissionType'
+    | 'status'
+    | 'trashStatus'
+    | 'createdAt'
+    | 'updatedAt'
+  > {
+  code?: UserAccountsInterface['code']
+  companyCode?: UserAccountsInterface['companyCode']
+  username?: UserAccountsInterface['username']
+  email?: UserAccountsInterface['email']
+  password?: UserAccountsInterface['password']
+  permissionType?: UserAccountsInterface['permissionType']
+  status?: UserAccountsInterface['status']
+  trashStatus?: UserAccountsInterface['trashStatus']
+  createdAt?: UserAccountsInterface['createdAt']
+  updatedAt?: UserAccountsInterface['updatedAt']
+}
 
 export default class UserService {
   private async checkIfExists(code: string): Promise<boolean> {
@@ -26,6 +51,15 @@ export default class UserService {
       if (isExists) code = randomString(3, { alphabetPre: true })
     } while (isExists)
     return code
+  }
+
+  private generateRandomPassword(): string {
+    const p1 = randomString(3, { alphabetLo: true })
+    const p2 = randomString(3, { alphabetUp: true })
+    const p3 = randomString(2, { number: true })
+    const p4 = randomString(2)
+    const randomPassword = [p1, p2, p3, p4].join('')
+    return randomPassword
   }
 
   private async hashPassword(password: string): Promise<string> {
@@ -159,5 +193,25 @@ export default class UserService {
       case 'suspend':
         throw new Error('Account Suspended')
     }
+  }
+
+  public async createNewAccount(
+    data: NewData
+  ): Promise<{ userCode: UserAccountsInterface['code']; newPassword: string }> {
+    if (!data.code) data.code = await this.getRandomCode()
+    if (!data.email) throw new Error('Invalid Email')
+    if (!data.username) throw new Error('Invalid Username')
+    if (!data.companyCode) throw new Error('Invalid Company Code')
+    let plainPassword: string = ''
+    if (!data.password) {
+      plainPassword = this.generateRandomPassword()
+      data.password = await this.hashPassword(plainPassword)
+    }
+    if (!data.status) data.status = 'active'
+    if (!data.trashStatus) data.trashStatus = false
+    if (!data.permissionType) data.permissionType = 'employee'
+    const res = await UserAccountModel.create(data)
+    const userCode: string = res.toJSON().code
+    return { userCode, newPassword: plainPassword }
   }
 }

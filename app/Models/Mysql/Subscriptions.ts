@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Subscriptions extends BaseModel {
+export default class SubscriptionsModel extends BaseModel {
   public static table = 'subscriptions'
 
   @column({

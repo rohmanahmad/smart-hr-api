@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class TaskEmailSender extends BaseModel {
+export default class TaskEmailSenderModel extends BaseModel {
   public static table = 'task_email_sender'
 
   @column({

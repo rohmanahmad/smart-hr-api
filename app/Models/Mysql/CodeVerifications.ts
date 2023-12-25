@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class CodeVerifications extends BaseModel {
+export default class CodeVerificationsModel extends BaseModel {
   public static table = 'code_verifications'
 
   @column({

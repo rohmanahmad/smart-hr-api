@@ -16,7 +16,7 @@ export default class extends BaseSchema {
       table.string('userCode', 4).notNullable().references('user_accounts.code')
       table.string('departementCode', 3).notNullable().references('departements.code')
       table.string('profileCode', 5).notNullable().references('profiles.code')
-      table.string('employementStatus', 20).notNullable().defaultTo('contract')
+      table.string('employmentStatus', 20).notNullable().defaultTo('contract')
       table.integer('salary').nullable()
       table.string('jobPosition', 30).nullable()
       table.datetime('hireDate').nullable()

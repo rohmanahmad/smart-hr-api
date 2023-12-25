@@ -89,14 +89,14 @@ export interface EmployeeAttendancesInterface {
   updatedAt?: string | null
 }
 
-export interface EmployeeInterface {
+export type EmployeesInterface = {
   code: string
   companyCode: string
   userCode: string
   departementCode: string
   profileCode: string
   employmentStatus: string
-  salary: string
+  salary?: string
   jobPosition?: string
   hireDate?: string
   createdAt: string | null

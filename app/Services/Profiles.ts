@@ -53,4 +53,18 @@ export default class Profiles {
     } while (isExists)
     return code
   }
+
+  public async createNewProfile(
+    firstName: ProfilesInterface['firstName'],
+    lastName: ProfilesInterface['lastName']
+  ): Promise<ProfilesInterface['code']> {
+    const data = {
+      code: await this.getRandomCode(),
+      firstName,
+      lastName,
+    }
+    const res = await ProfileModel.create(data)
+    const profilCode: string = res.toJSON().code
+    return profilCode
+  }
 }
