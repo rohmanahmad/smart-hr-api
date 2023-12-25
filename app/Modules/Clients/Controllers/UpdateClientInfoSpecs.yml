@@ -1,12 +1,20 @@
-/api/v1/client/info:
-  get:
+/api/v1/client/info/update:
+  post:
     tags:
       - Clients
     security: []
-    summary: Client Info
-    description: Get Full Client Info
-    parameters:
-      - $ref: '#/parameters/clientCode'
+    summary: Update Client
+    description: Update New Client
+    requestBody:
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              code:
+                $ref: '#/definitions/generals/string'
+              name:
+                $ref: '#/definitions/generals/string'
     responses:
       '200':
         description: Success
@@ -18,7 +26,7 @@
                 status:
                   $ref: '#/responses/codes/200'
                 message:
-                  $ref: '#/responses/messages/retrieve'
+                  $ref: '#/responses/messages/success'
       '4xx':
         description: Bad Request (Input Data Maybe Invalid)
         content:

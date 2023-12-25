@@ -1,12 +1,12 @@
-/api/v1/client/info:
+/api/v1/company/info:
   get:
     tags:
-      - Clients
+      - Companies
     security: []
-    summary: Client Info
-    description: Get Full Client Info
+    summary: Company Info
+    description: Get Full Company Info
     parameters:
-      - $ref: '#/parameters/clientCode'
+      - $ref: '#/parameters/companyCode'
     responses:
       '200':
         description: Success

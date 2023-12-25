@@ -64,4 +64,33 @@ export default class CompanyService {
     if (name.length < 2) throw new Error('Company Name must be at lease 2 characters')
     return true
   }
+
+  public async getCompanyInfoByCode(companyCode: string): Promise<object> {
+    try {
+      const q = await CompaniesModel.findBy('code', companyCode)
+      const data = q?.toJSON()
+      return data || {}
+    } catch (err) {
+      throw err
+    }
+  }
+
+  public async updateCompanyInfo(code: string, input): Promise<boolean> {
+    try {
+      const { name, description, address, phoneNumber1, phoneNumber2, email, website } = input
+      const q = await CompaniesModel.findByOrFail('code', code)
+      if (!q) throw new Error('Invalid Company Code')
+      q.name = name
+      q.description = description
+      q.address = address
+      q.phoneNumber1 = phoneNumber1
+      q.phoneNumber2 = phoneNumber2
+      q.email = email
+      q.website = website
+      await q.save()
+      return true
+    } catch (err) {
+      throw err
+    }
+  }
 }

@@ -103,4 +103,28 @@ export default class ClientServie {
       throw err
     }
   }
+
+  public async getClientInfoByCode(clientCode): Promise<object> {
+    try {
+      const q = await ClientModel.findBy('code', clientCode)
+      const data = q?.toJSON()
+      return data || {}
+    } catch (err) {
+      throw err
+    }
+  }
+
+  public async updateClientByCode(code: string, input): Promise<boolean> {
+    try {
+      const { name } = input
+      const q = await ClientModel.findByOrFail('code', code)
+      if (!q) throw new Error('invalid client code')
+      q.name = name
+      q.updatedAt = DateTimeNowISO()
+      await q.save()
+      return true
+    } catch (err) {
+      throw err
+    }
+  }
 }
