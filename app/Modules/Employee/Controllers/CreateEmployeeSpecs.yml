@@ -19,7 +19,7 @@
                 $ref: '#/definitions/generals/string'
               departementCode:
                 $ref: '#/definitions/generals/string'
-              userNAme:
+              userName:
                 $ref: '#/definitions/generals/string'
 
     responses:

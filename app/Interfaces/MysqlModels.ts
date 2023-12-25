@@ -89,14 +89,14 @@ export type EmployeeAttendancesInterface = {
   updatedAt?: string | null
 }
 
-export type EmployeeInterface = {
+export type EmployeesInterface = {
   code: string
   companyCode: string
   userCode: string
   departementCode: string
   profileCode: string
   employmentStatus: string
-  salary: string
+  salary?: string
   jobPosition?: string
   hireDate?: string
   createdAt: string | null
