@@ -118,4 +118,18 @@ export default class ClientServie extends PrivateClientService {
       throw err
     }
   }
+
+  public async updateClientByCode(code: string, input): Promise<boolean> {
+    try {
+      const { name } = input
+      const q = await ClientModel.findByOrFail('code', code)
+      if (!q) throw new Error('invalid client code')
+      q.name = name
+      q.updatedAt = DateTimeNowISO()
+      await q.save()
+      return true
+    } catch (err) {
+      throw err
+    }
+  }
 }

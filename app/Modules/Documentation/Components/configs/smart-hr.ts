@@ -24,6 +24,7 @@ const config = {
     'app/Modules/Employee/**/*.yml',
     'app/Modules/Clients/**/*.yml',
     'app/Modules/Companies/**/*.yml',
+    'app/Modules/Departements/**/*.yml',
   ],
   basePath: '/',
 }
