@@ -74,7 +74,7 @@ export default class UserAccountRegistrationController {
   private async createCodeVerification(userCode: string): Promise<void> {
     try {
       const cv = new CodeVerificationsService()
-      await cv.createNewRegistrationCode('registration', userCode)
+      await cv.createNewRegistrationCode(userCode)
     } catch (err) {
       throw err
     }

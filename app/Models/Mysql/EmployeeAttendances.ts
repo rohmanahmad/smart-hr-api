@@ -5,8 +5,8 @@ export default class EmployeeAttendancesModel extends BaseModel {
   public static table = 'employee_attendances'
 
   @column({
-    columnName: '_id',
-    serializeAs: '_id',
+    columnName: 'id',
+    serializeAs: 'id',
     isPrimary: true,
   })
   public _id: number

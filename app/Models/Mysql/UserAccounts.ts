@@ -66,7 +66,7 @@ export default class UserAccountsModel extends BaseModel {
       return val || 'pending-confirmation'
     },
   })
-  public status: string
+  public status: 'active' | 'blocked' | 'pending-confirmation' | 'suspend'
 
   @column({
     columnName: 'trashStatus',

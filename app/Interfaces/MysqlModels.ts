@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 
-export type LocationsInterface = {
+export interface LocationsInterface {
   code: string
   postalCode: string
   name: string
@@ -13,7 +13,7 @@ export type LocationsInterface = {
   updatedAt?: string | null
 }
 
-export type ClientAdminInterface = {
+export interface ClientAdminInterface {
   id?: number
   clientCode: string
   userCode: string
@@ -22,7 +22,7 @@ export type ClientAdminInterface = {
   updatedAt?: string | null
 }
 
-export type ClientsInterface = {
+export interface ClientsInterface {
   code: string
   name: string
   subscriptionCode?: string
@@ -30,16 +30,16 @@ export type ClientsInterface = {
   updatedAt?: string | null
 }
 
-export type CodeVerificationsInterface = {
+export interface CodeVerificationsInterface {
   code: string
   userCode: string
-  codeType: string
+  codeType: 'registration' | 'login' | 'forgot-password'
   ttl: string | null
   createdAt: string | null
   updatedAt?: string | null
 }
 
-export type CompaniesInterface = {
+export interface CompaniesInterface {
   code: string
   name: string
   description?: string
@@ -53,7 +53,7 @@ export type CompaniesInterface = {
   updatedAt?: string | null
 }
 
-export type DepartementsInterface = {
+export interface DepartementsInterface {
   code: string
   companyCode: string
   name: string
@@ -62,8 +62,8 @@ export type DepartementsInterface = {
   updatedAt?: string | null
 }
 
-export type DepartementManagersInterface = {
-  _id: number
+export interface DepartementManagersInterface {
+  id: number | null
   companyCode: string
   departementCode: string
   employeeCode: string
@@ -71,8 +71,8 @@ export type DepartementManagersInterface = {
   updatedAt?: string | null
 }
 
-export type EmployeeAttendancesInterface = {
-  _id: number
+export interface EmployeeAttendancesInterface {
+  id: number | null
   companyCode: string
   employeeCode: string
   shiftCode: string
@@ -103,7 +103,7 @@ export type EmployeesInterface = {
   updatedAt?: string | null
 }
 
-export type ProfilesInterface = {
+export interface ProfilesInterface {
   code: string
   firstName?: string
   lastName?: string
@@ -116,7 +116,7 @@ export type ProfilesInterface = {
   updatedAt?: string | null
 }
 
-export type ShiftTypesInterface = {
+export interface ShiftTypesInterface {
   code: string
   companyCode: string
   name: string
@@ -127,8 +127,8 @@ export type ShiftTypesInterface = {
   updatedAt?: string | null
 }
 
-export type SubscriptionFeaturesInterface = {
-  _id: number
+export interface SubscriptionFeaturesInterface {
+  id: number | null
   subscriptionCode: string
   feature: string
   status: string
@@ -137,7 +137,7 @@ export type SubscriptionFeaturesInterface = {
   updatedAt?: string | null
 }
 
-export type SubscriptionsInterface = {
+export interface SubscriptionsInterface {
   code: string
   name: string
   description?: string
@@ -146,32 +146,32 @@ export type SubscriptionsInterface = {
   updatedAt?: string | null
 }
 
-export type UserAccountsInterface = {
+export interface UserAccountsInterface {
   code: string
   companyCode: string
   username: string
   email: string
   password: string
   permissionType: 'basic-user' | 'employee' | 'manager' | 'other'
-  status: string
+  status: 'active' | 'blocked' | 'pending-confirmation' | 'suspend'
   trashStatus: boolean
   createdAt: string | null
   updatedAt?: string | null
 }
 
-export type UserActivitiesInterface = {
-  _id: number
+export interface UserActivitiesInterface {
+  id: number | null
   userCode: string
-  date?: DateTime
+  date?: string | null
   type?: 'login' | 'forgot-password' | 'other'
   detail?: string
   createdAt: string | null
   updatedAt?: string | null
 }
 
-export type TasksEmailSender = {
-  id: number
-  uuid: string
+export interface TasksEmailSenderInterface {
+  id: number | null
+  uuid: string | null
   sentAsEmail: string
   sentAsName: string
   email: string
@@ -182,6 +182,15 @@ export type TasksEmailSender = {
   status: 'pending' | 'sent' | 'cancel'
   templateName: string
   contentData: string
+  createdAt: string | null
+  updatedAt?: string | null
+}
+
+export interface UserTokensInterface {
+  id: number | null
+  userCode: string
+  token: string
+  ttl?: DateTime
   createdAt: string | null
   updatedAt: string | null
 }

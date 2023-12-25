@@ -6,32 +6,22 @@ import { DateTimeNowISO, DateUTC } from 'App/Helpers/Date'
 type VerificationCode = string
 
 export default class CodeVerificationsService {
-  public async createNewRegistrationCode(
-    type: string,
-    userCode: string
+  private async createNewVerificationCode(
+    userCode: string,
+    codeType: CodeVerificationsInterface['codeType']
   ): Promise<VerificationCode> {
-    try {
-      let vc = this.getCode()
-      let isExists = false
-      do {
-        isExists = await this.checkCodeExists(vc)
-        if (isExists) vc = this.getCode()
-      } while (isExists)
-      const data: CodeVerificationsInterface = {
-        userCode,
-        codeType: type,
-        code: vc,
-        ttl: DateUTC()
-          .plus({ hours: 2 * 24 })
-          .toSQLDate(),
-        createdAt: DateTimeNowISO(),
-      }
-      const res = await CodeVerifications.create(data)
-      const verificationCode: string = res.toJSON().code
-      return verificationCode
-    } catch (err) {
-      throw err
+    const data: CodeVerificationsInterface = {
+      userCode,
+      codeType,
+      code: await this.getCode(),
+      ttl: DateUTC()
+        .plus({ hours: 2 * 24 })
+        .toSQLDate(),
+      createdAt: DateTimeNowISO(),
     }
+    const res = await CodeVerifications.create(data)
+    const verificationCode: string = res.toJSON().code
+    return verificationCode
   }
 
   private async checkCodeExists(verificationCode: string): Promise<boolean> {
@@ -44,7 +34,31 @@ export default class CodeVerificationsService {
     }
   }
 
-  private getCode() {
-    return randomString(4, { number: true })
+  private async getCode(): Promise<string> {
+    let vc = randomString(4, { number: true })
+    let isExists = false
+    do {
+      isExists = await this.checkCodeExists(vc)
+      if (isExists) vc = randomString(4, { number: true })
+    } while (isExists)
+    return vc
+  }
+
+  public async createNewRegistrationCode(userCode: string): Promise<VerificationCode> {
+    try {
+      const code = await this.createNewVerificationCode(userCode, 'registration')
+      return code
+    } catch (err) {
+      throw err
+    }
+  }
+
+  public async createNewForgotPasswordCode(userCode: string): Promise<VerificationCode> {
+    try {
+      const code = await this.createNewVerificationCode(userCode, 'forgot-password')
+      return code
+    } catch (err) {
+      throw err
+    }
   }
 }
