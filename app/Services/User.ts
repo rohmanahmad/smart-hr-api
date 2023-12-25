@@ -138,4 +138,10 @@ export default class UserService {
       throw err
     }
   }
+
+  public async createNewAccount(data): Promise<UserAccountsInterface['code']> {
+    const res = await UserAccountModel.create(data)
+    const userCode: string = res.toJSON().code
+    return userCode
+  }
 }
