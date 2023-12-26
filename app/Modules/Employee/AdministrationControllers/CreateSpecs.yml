@@ -1,0 +1,62 @@
+/api/v1/administration/employee/create:
+  post:
+    tags:
+      - Employees
+    security: []
+    summary: Create Employee
+    description: Create New Employee in All Companies
+    requestBody:
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              userCode:
+                $ref: '#/definitions/generals/string'
+              companyCode:
+                $ref: '#/definitions/generals/string'
+              departementCode:
+                $ref: '#/definitions/generals/string'
+              profileCode:
+                $ref: '#/definitions/generals/string'
+              employmentStatus:
+                $ref: '#/definitions/user_defined/employment_status'
+              salary:
+                $ref: '#/definitions/generals/number'
+              jobPosition:
+                $ref: '#/definitions/generals/string'
+              hireDate:
+                $ref: '#/definitions/generals/date'
+
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  $ref: '#/responses/codes/200'
+                message:
+                  $ref: '#/responses/messages/success'
+                data:
+                  type: object
+                  properties:
+                    item:
+                      type: object
+                      properties:
+                        code:
+                          $ref: '#/definitions/generals/string'
+      '4xx':
+        description: Bad Request (Input Data Maybe Invalid)
+        content:
+          application/json:
+            schema:
+              $ref: '#/responses/4xx'
+      '500':
+        description: Error From Internal
+        content:
+          application/json:
+            schema:
+              $ref: '#/responses/5xx'

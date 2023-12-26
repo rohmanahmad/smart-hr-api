@@ -41,3 +41,130 @@ responses:
       stack:
         type: array
         example: []
+  pagination:
+    type: object
+    properties:
+      page:
+        type: object
+        properties:
+          current:
+            $ref: '#/definitions/generals/number'
+          next:
+            $ref: '#/definitions/generals/number'
+          prev:
+            $ref: '#/definitions/generals/number'
+          total:
+            $ref: '#/definitions/generals/number'
+  companyInformation:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/generals/string'
+        example: 'DFR'
+      name:
+        $ref: '#/definitions/generals/string'
+        example: PT Alam Semesta
+      description:
+        $ref: '#/definitions/generals/string'
+        example: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      address:
+        $ref: '#/definitions/generals/string'
+        example: Jl Tebet Barat
+      location:
+        $ref: '#/responses/locationInformation'
+        example: PGTH89EW
+      phoneNumber1:
+        $ref: '#/definitions/generals/string'
+        example: 082002002002
+      phoneNumber2:
+        $ref: '#/definitions/generals/string'
+        example: 081002990039
+      email:
+        $ref: '#/definitions/generals/string'
+        example: mail@company.com
+      website:
+        $ref: '#/definitions/generals/string'
+        example: company1.com
+      createdAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 00:00'
+      updatedAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 01:01'
+  departementInformation:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/generals/string'
+        example: 'MKJ'
+      name:
+        $ref: '#/definitions/generals/string'
+        example: Business Development
+      createdAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 00:00'
+      updatedAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 01:01'
+  profileInformation:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/generals/string'
+        example: 'J4jsh'
+      firstName:
+        $ref: '#/definitions/generals/string'
+        example: Tukimin
+      lastName:
+        $ref: '#/definitions/generals/string'
+        example: Papilo SH
+      pictureURL:
+        $ref: '#/definitions/generals/string'
+        example: 'https://cdn-profile.smarthr.com/images/profiles/J4jsh'
+      address:
+        $ref: '#/definitions/generals/string'
+        example: Jl. Tebet Barat 4 no 23 Jaksel
+      birthDate:
+        $ref: '#/definitions/generals/string'
+        example: '1994-01-01'
+      gender:
+        $ref: '#/definitions/generals/string'
+        example: Male
+      location:
+        $ref: '#/responses/locationInformation'
+      createdAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 00:00'
+      updatedAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 01:01'
+  locationInformation:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/generals/string'
+        example: 'KjspL'
+      postalCode:
+        $ref: '#/definitions/generals/string'
+        example: '128029'
+      negara:
+        $ref: '#/definitions/generals/string'
+        example: Indonesia
+      provinsi:
+        $ref: '#/definitions/generals/string'
+        example: DKI Jakarta
+      kabkota:
+        $ref: '#/definitions/generals/string'
+        example: Jakarta Selatan
+      kecamatan:
+        $ref: '#/definitions/generals/string'
+        example: Tebet
+      desa:
+        $ref: '#/definitions/generals/string'
+        example: Tebet Barat
+      createdAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 00:00'
+      updatedAt:
+        $ref: '#/definitions/generals/string'
+        example: '2023-02-02 01:01'

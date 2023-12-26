@@ -13,6 +13,9 @@ definitions:
       type: string
       format: password
       default: ''
+    date:
+      type: date
+      format: date
 
   user_defined:
     limit:
@@ -23,230 +26,15 @@ definitions:
       type: number
       default: 1
       example: 1
-    project:
-      type: string
-      example: 238
-    date_string:
-      type: string
-      example: 2023-10-12T10:31:58.012Z
     date_format:
       type: date
       example: 2023-11-01
-    date_with_hour_format:
-      type: date
-      example: 2023-11-01 01:00
-    date_month_format:
-      type: date
-      example: 2023-11
-    time_format:
-      type: string
-      example: 00:00
-    service_category:
-      type: string
-      example: 1,2,3,4,5,6,7
-    section:
-      type: string
-      example: negative,neutral,positive
-    locations:
-      type: string
-    location_kab_kota:
-      type: string
-    type:
+    employment_status:
       type: string
       enum:
-        - daily
-        - monthly
-        - hourly
-    group_service:
-      type: boolean
-      default: false
-    filter_by:
-      type: string
-      enum:
-        - mention
-        - engagement
-        - unique_author
-        - reach
-    show_total:
-      type: boolean
-      default: false
-    avatar:
-      type: string
-      example: https://pbs.twimg.com/profile_images/1418498745994416130/QIVQpKN0_normal.jpg
-    profile:
-      type: string
-      example: https://twitter.com/kuahsotoyyy/
-    user_name:
-      type: string
-      example: kuahsotoyyy
-    followers:
-      type: number
-      example: 12000
-    realname:
-      type: string
-      example: Indomie
-    score:
-      type: number
-      example: 19
-    service:
-      type: string
-      example: Twitter
-    rate:
-      type: string
-      example: 0.06
-    engagements:
-      type: number
-      example: 1000
-    reach:
-      type: number
-      example: 2000
-    percentage:
-      type: number
-      example: 30.01
-    compare_dir_type:
-      type: string
-      enum: [up, '-', down]
-    date_time_string:
-      type: string
-      example: '2023-01-02 23:59:59'
-    stream_id:
-      type: string
-      example: 1716709952545575324
-    sentiment_value:
-      type: number
-      example: -1
-    string_sentiment:
-      type: string
-      enum: [positive, negative, neutral]
-      example: positive
-    color:
-      type: string
-      example: '#00ACEE'
-    compare:
-      type: boolean
-      example: false
-    compare_by_channel:
-      type: object
-      properties:
-        count:
-          type: number
-          example: 12000
-        compare:
-          type: object
-          properties:
-            count:
-              type: number
-              example: 1000
-            diff_percentage:
-              $ref: '#/definitions/user_defined/percentage'
-            dir_type:
-              $ref: '#/definitions/user_defined/compare_dir_type'
-            detail:
-              type: object
-              properties:
-                since:
-                  $ref: '#/definitions/user_defined/date_time_string'
-                until:
-                  $ref: '#/definitions/user_defined/date_time_string'
-    average_daily_mentions:
-      type: object
-      properties:
-        'sun':
-          $ref: '#/definitions/generals/number'
-        'mon':
-          $ref: '#/definitions/generals/number'
-        'tue':
-          $ref: '#/definitions/generals/number'
-        'wed':
-          $ref: '#/definitions/generals/number'
-        'thr':
-          $ref: '#/definitions/generals/number'
-        'fri':
-          $ref: '#/definitions/generals/number'
-        'sat':
-          $ref: '#/definitions/generals/number'
-    emotion_item:
-      type: object
-      properties:
-        anticipation:
-          $ref: '#definitions/generals/number'
-        sad:
-          $ref: '#definitions/generals/number'
-        joy:
-          $ref: '#definitions/generals/number'
-        fear:
-          $ref: '#definitions/generals/number'
-        trust:
-          $ref: '#definitions/generals/number'
-        suprise:
-          $ref: '#definitions/generals/number'
-        disgusting:
-          $ref: '#definitions/generals/number'
-    ocean_item:
-      type: object
-      properties:
-        officials:
-          $ref: '#/definitions/generals/number'
-        audiences:
-          $ref: '#/definitions/generals/number'
-        total:
-          $ref: '#/definitions/generals/number'
-    ocean:
-      type: object
-      properties:
-        name:
-          $ref: '#definitions/user_defined/service'
-        color:
-          $ref: '#definitions/user_defined/color'
-        count:
-          $ref: '#/definitions/generals/number'
-        post_count:
-          $ref: '#/definitions/generals/number'
-        comment_count:
-          $ref: '#/definitions/generals/number'
-        ocean:
-          type: object
-          properties:
-            o:
-              $ref: '#/definitions/user_defined/ocean_item'
-            c:
-              $ref: '#/definitions/user_defined/ocean_item'
-            e:
-              $ref: '#/definitions/user_defined/ocean_item'
-            a:
-              $ref: '#/definitions/user_defined/ocean_item'
-            n:
-              $ref: '#/definitions/user_defined/ocean_item'
-        emotions:
-          $ref: '#/definitions/user_defined/emotion_item'
-    pagination_object:
-      type: object
-      properties:
-        totalPages: 
-          $ref: '#/definitions/generals/number'
-        currentPage: 
-          $ref: '#/definitions/generals/number'
-        nextPage: 
-          $ref: '#/definitions/generals/number'
-        prevPage: 
-          $ref: '#/definitions/generals/number'
-    array_usernames:
-      type: array
-      example:
-        - "jouqliet"
-        - "enysetyia"
-        - "meili76moruk"
-        - "albert_seran"
-        - "Hadi_Ruwadi"
-    object_compare:
-      type: object
-      properties:
-        total:
-          type: number
-          example: 20000
-        percentage:
-          type: number
-          example: 10
-        direction:
-          type: string
-          example: 'up/down/-'
+        - 'contract'
+        - 'full-time'
+        - 'independent'
+        - 'intern'
+        - 'part-time'
+        - 'volunteer'

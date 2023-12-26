@@ -19,12 +19,12 @@ const config = {
 
   apis: [
     'app/Modules/Documentation/**/*.yml',
-    'app/Modules/Authentication/**/*.yml',
-    'app/Modules/UserAccounts/**/*.yml',
-    'app/Modules/Employee/**/*.yml',
-    'app/Modules/Clients/**/*.yml',
-    'app/Modules/Companies/**/*.yml',
-    'app/Modules/Departements/**/*.yml',
+    'app/Modules/Authentication/Controllers/*.yml',
+    'app/Modules/UserAccounts/Controllers/*.yml',
+    'app/Modules/Employee/Controllers/*.yml',
+    'app/Modules/Clients/Controllers/*.yml',
+    'app/Modules/Companies/Controllers/*.yml',
+    'app/Modules/Departements/Controllers/*.yml',
   ],
   basePath: '/',
 }
