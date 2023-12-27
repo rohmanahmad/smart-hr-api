@@ -17,3 +17,9 @@ parameters:
     description: Code for Departement
     schema:
       $ref: '#/definitions/generals/string'
+  EmployeeCode:
+    in: query
+    name: EmployeeCode
+    description: Code for Employee
+    schema:
+      $ref: '#/definitions/generals/string'

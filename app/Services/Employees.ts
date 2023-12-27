@@ -15,4 +15,14 @@ export default class EmployeeService {
     if (q) return true
     else return false
   }
+
+  public async getEmployeeInfo(code: EmployeesInterface['code']): Promise<object> {
+    try {
+      const q = await EmployeesModel.findBy('code', code)
+      const data = q?.toJSON()
+      return data || {}
+    } catch (err) {
+      throw err
+    }
+  }
 }
