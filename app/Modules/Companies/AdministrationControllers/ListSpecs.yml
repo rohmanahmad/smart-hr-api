@@ -1,0 +1,62 @@
+/api/v1/administration/company/list:
+  get:
+    tags:
+      - Companies
+    security: []
+    summary: List All Company
+    description: List All New Company in All Companies
+    requestBody:
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              CompanyCode:
+                $ref: '#/definitions/generals/string'
+              companyCode:
+                $ref: '#/definitions/generals/string'
+              departementCode:
+                $ref: '#/definitions/generals/string'
+              fullname:
+                $ref: '#/definitions/generals/string'
+
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  $ref: '#/responses/codes/200'
+                message:
+                  $ref: '#/responses/messages/success'
+                data:
+                  type: object
+                  properties:
+                    items:
+                      type: array
+                      items: 
+                        type: object
+                        properties:
+                          code:
+                            $ref: '#/definitions/generals/string'
+                          company:
+                            $ref: '#/responses/companyInformation'
+                          departement:
+                            $ref: '#/responses/departementInformation'
+                          profile:
+                            $ref: '#/responses/profileInformation'
+      '4xx':
+        description: Bad Request (Input Data Maybe Invalid)
+        content:
+          application/json:
+            schema:
+              $ref: '#/responses/4xx'
+      '500':
+        description: Error From Internal
+        content:
+          application/json:
+            schema:
+              $ref: '#/responses/5xx'

@@ -95,7 +95,7 @@ export type EmployeesInterface = {
   userCode: string
   departementCode: string
   profileCode: string
-  employmentStatus: string
+  employmentStatus: 'contract' | 'full-time' | 'independent' | 'intern' | 'part-time' | 'volunteer'
   salary?: string
   jobPosition?: string
   hireDate?: string
