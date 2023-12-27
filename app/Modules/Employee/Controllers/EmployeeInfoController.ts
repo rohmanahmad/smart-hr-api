@@ -1,4 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { EmployeesInterface } from 'App/Interfaces/MysqlModels'
+import EmployeeService from 'App/Services/Employees'
 import { DateTime } from 'luxon'
 
 type Activity = {
@@ -31,9 +33,21 @@ interface ReponseInterface {
 export default class UserAccountActivitiesController {
   public async handle({ request, response, auth }: HttpContextContract) {
     try {
-      response.apiCollection({})
+      const { employeeCode } = request.qs()
+      const data = await this.getEmployeeInfo(employeeCode)
+      response.apiCollection(data)
     } catch (err) {
       response.apiError(err)
+    }
+  }
+
+  private async getEmployeeInfo(employeeCode: EmployeesInterface['code']): Promise<object> {
+    try {
+      const es = new EmployeeService()
+      const data = es.getEmployeeInfo(employeeCode)
+      return data
+    } catch (err) {
+      throw err
     }
   }
 }
