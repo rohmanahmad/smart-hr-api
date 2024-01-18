@@ -2,7 +2,7 @@ const config = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: '(v1.x.x) SmartHR API Documentation',
+      title: '(v1.x.x) SmartHR API Documentation (Administration)',
       version: '1.0.0',
       description: 'SmartHR API Documentation',
     },
