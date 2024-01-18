@@ -93,4 +93,10 @@ export default class CompanyService {
       throw err
     }
   }
+
+  public async companyAdminList() {
+    const q = await CompaniesModel.all()
+    const data = q.map((x) => x.toJSON())
+    return data
+  }
 }

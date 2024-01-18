@@ -127,4 +127,10 @@ export default class ClientServie {
       throw err
     }
   }
+
+  public async clientAdminList() {
+    const q = await ClientModel.all()
+    const data = q.map((x) => x.toJSON())
+    return data
+  }
 }

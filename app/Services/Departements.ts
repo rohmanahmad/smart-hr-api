@@ -3,6 +3,7 @@ import { DepartementsInterface } from 'App/Interfaces/MysqlModels'
 import { randomString } from 'App/Helpers/Utilities'
 import Departements from 'App/Models/Mysql/Departements'
 import { DateTimeNowISO } from 'App/Helpers/Date'
+import DepartementsModel from 'App/Models/Mysql/Departements'
 
 export default class DepartementService {
   private async checkIfExists(code: string): Promise<boolean> {
@@ -82,5 +83,11 @@ export default class DepartementService {
     } catch (err) {
       throw err
     }
+  }
+
+  public async departementAdminList() {
+    const q = await DepartementsModel.all()
+    const data = q.map((x) => x.toJSON())
+    return data
   }
 }

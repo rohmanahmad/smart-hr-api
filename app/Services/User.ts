@@ -213,4 +213,10 @@ export default class UserService {
     const userCode: string = res.toJSON().code
     return { userCode, newPassword: plainPassword }
   }
+
+  public async userAdminList() {
+    const q = await UserAccountModel.all()
+    const data = q.map((x) => x.toJSON())
+    return data
+  }
 }

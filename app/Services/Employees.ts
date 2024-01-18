@@ -15,4 +15,10 @@ export default class EmployeeService {
     if (q) return true
     else return false
   }
+
+  public async employeeAdminList() {
+    const q = await EmployeesModel.all()
+    const data = q.map((x) => x.toJSON())
+    return data
+  }
 }
