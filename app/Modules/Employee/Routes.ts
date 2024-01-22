@@ -15,4 +15,4 @@ Route.group(() => {
   Route.post('/delete', 'Delete')
 })
   .prefix('/api/v1/administration/employees')
-  .namespace('App/Modules/Employees/AdministrationControllers')
+  .namespace('App/Modules/Employee/AdministrationControllers')

@@ -1,4 +1,4 @@
-/api/v1/administration/user-account/update:
+/api/v1/administration/user-accounts/update:
   put:
     tags:
       - User Accounts
@@ -11,22 +11,18 @@
           schema:
             type: object
             properties:
-              userCode:
+              code:
                 $ref: '#/definitions/generals/string'
-              companyCode:
+              email:
                 $ref: '#/definitions/generals/string'
-              departementCode:
+              username:
                 $ref: '#/definitions/generals/string'
-              profileCode:
+              password:
                 $ref: '#/definitions/generals/string'
-              employmentStatus:
-                $ref: '#/definitions/user_defined/employment_status'
-              salary:
-                $ref: '#/definitions/generals/number'
-              jobPosition:
+              status:
                 $ref: '#/definitions/generals/string'
-              hireDate:
-                $ref: '#/definitions/generals/date'
+              trashStatus:
+                $ref: '#/definitions/generals/string'
 
     responses:
       '200':

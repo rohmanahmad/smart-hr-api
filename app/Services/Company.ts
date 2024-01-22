@@ -94,7 +94,7 @@ export default class CompanyService {
     }
   }
 
-  public async companyAdminList() {
+  public async companyList() {
     const q = await CompaniesModel.all()
     const data = q.map((x) => x.toJSON())
     return data

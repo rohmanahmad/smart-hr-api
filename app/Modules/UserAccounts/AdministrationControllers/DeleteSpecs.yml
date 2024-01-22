@@ -1,4 +1,4 @@
-/api/v1/administration/user-account/delete:
+/api/v1/administration/user-accounts/delete:
   delete:
     tags:
       - User Accounts
@@ -11,7 +11,7 @@
           schema:
             type: object
             properties:
-              User AccountCode:
+              userCode:
                 $ref: '#/definitions/generals/string'
 
     responses:

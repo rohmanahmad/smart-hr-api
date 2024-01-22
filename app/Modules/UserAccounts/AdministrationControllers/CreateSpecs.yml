@@ -1,4 +1,4 @@
-/api/v1/administration/user-account/create:
+/api/v1/administration/user-accounts/create:
   post:
     tags:
       - User Accounts
@@ -11,23 +11,16 @@
           schema:
             type: object
             properties:
-              userCode:
-                $ref: '#/definitions/generals/string'
               companyCode:
                 $ref: '#/definitions/generals/string'
-              departementCode:
+              email:
                 $ref: '#/definitions/generals/string'
-              profileCode:
+              username:
                 $ref: '#/definitions/generals/string'
-              employmentStatus:
-                $ref: '#/definitions/user_defined/employment_status'
-              salary:
-                $ref: '#/definitions/generals/number'
-              jobPosition:
-                $ref: '#/definitions/generals/string'
-              hireDate:
-                $ref: '#/definitions/generals/date'
-
+              password:
+                $ref: '#/definitions/generals/password'
+              confirmPassword:
+                $ref: '#/definitions/generals/password'
     responses:
       '200':
         description: Success

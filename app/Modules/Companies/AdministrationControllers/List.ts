@@ -4,17 +4,17 @@ import CompanyService from 'App/Services/Company'
 export default class List {
   public async handle({ request, response, auth }: HttpContextContract): Promise<void> {
     try {
-      const data = await this.companyAdminList()
+      const data = await this.getList()
       response.apiCollection({ data })
     } catch (err) {
       throw err
     }
   }
 
-  private async companyAdminList() {
+  private async getList() {
     try {
       const cs = new CompanyService()
-      const data = await cs.companyAdminList()
+      const data = await cs.companyList()
       return data
     } catch (err) {
       throw err
