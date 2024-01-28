@@ -11,13 +11,7 @@
           schema:
             type: object
             properties:
-              userCode:
-                $ref: '#/definitions/generals/string'
-              companyCode:
-                $ref: '#/definitions/generals/string'
-              departementCode:
-                $ref: '#/definitions/generals/string'
-              profileCode:
+              code:
                 $ref: '#/definitions/generals/string'
               employmentStatus:
                 $ref: '#/definitions/user_defined/employment_status'
@@ -25,8 +19,6 @@
                 $ref: '#/definitions/generals/number'
               jobPosition:
                 $ref: '#/definitions/generals/string'
-              hireDate:
-                $ref: '#/definitions/generals/date'
 
     responses:
       '200':

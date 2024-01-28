@@ -1,4 +1,4 @@
-/api/v1/administration/departement/create:
+/api/v1/administration/departements/create:
   post:
     tags:
       - Departements
@@ -11,11 +11,12 @@
           schema:
             type: object
             properties:
-              clientName:
+              companyCode:
                 $ref: '#/definitions/generals/string'
-              subscriptionCode:
+              name:
                 $ref: '#/definitions/generals/string'
-
+              description:
+                $ref: '#/definitions/generals/string'
     responses:
       '200':
         description: Success

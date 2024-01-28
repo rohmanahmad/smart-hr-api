@@ -1,4 +1,4 @@
-/api/v1/administration/departement/delete:
+/api/v1/administration/departements/delete:
   delete:
     tags:
       - Departements
@@ -11,7 +11,7 @@
           schema:
             type: object
             properties:
-              clientCode:
+              departementCode:
                 $ref: '#/definitions/generals/string'
 
     responses:

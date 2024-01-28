@@ -15,8 +15,6 @@
                 $ref: '#/definitions/generals/string'
               name:
                 $ref: '#/definitions/generals/string'
-              subscriptionCode:
-                $ref: '#/definitions/generals/string'
 
     responses:
       '200':

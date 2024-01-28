@@ -11,8 +11,6 @@
           schema:
             type: object
             properties:
-              clientName:
-                $ref: '#/definitions/generals/string'
               subscriptionCode:
                 $ref: '#/definitions/generals/string'
 

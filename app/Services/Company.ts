@@ -2,6 +2,7 @@ import { DateTimeNowISO } from 'App/Helpers/Date'
 import { randomString } from 'App/Helpers/Utilities'
 import { CompaniesInterface } from 'App/Interfaces/MysqlModels'
 import CompaniesModel from 'App/Models/Mysql/Companies'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 type CompanyCode = string
 
@@ -98,5 +99,38 @@ export default class CompanyService {
     const q = await CompaniesModel.all()
     const data = q.map((x) => x.toJSON())
     return data
+  }
+
+  public async createCompany({
+    name,
+    description,
+    address,
+    locationCode,
+    phoneNumber1,
+    phoneNumber2,
+    email,
+    website,
+  }): Promise<CompaniesInterface['code']> {
+    try {
+      Logger.info('creating company')
+      const data: CompaniesInterface = {
+        code: await this.getRandomCode(),
+        name,
+        description,
+        address,
+        locationCode,
+        phoneNumber1,
+        phoneNumber2,
+        email,
+        website,
+        createdAt: DateTimeNowISO(),
+      }
+
+      const res = await CompaniesModel.create(data)
+      const companyCode = await res.toJSON().code
+      return companyCode
+    } catch (err) {
+      throw err
+    }
   }
 }

@@ -140,7 +140,9 @@ export default class UserService {
     try {
       Logger.info('Deleting User Account: %o', { userCode })
       const data = await UserAccountModel.findByOrFail('code', userCode)
+      if (!data) throw new Error('Invalid User Code')
       await data.delete()
+      return true
     } catch (err) {
       throw err
     }
@@ -218,5 +220,24 @@ export default class UserService {
     const q = await UserAccountModel.all()
     const data = q.map((x) => x.toJSON())
     return data
+  }
+
+  public async updateUser(code: string, input): Promise<boolean> {
+    try {
+      const { email, username, password, status, trashStatus } = input
+      const q = await UserAccountModel.findByOrFail('code', code)
+      if (!q) throw new Error('invalid user code')
+
+      q.email = email
+      q.username = username
+      q.password = await this.hashPassword(password)
+      q.status = status
+      q.trashStatus = trashStatus
+      q.updatedAt = DateTimeNowISO()
+      await q.save()
+      return true
+    } catch (err) {
+      throw err
+    }
   }
 }

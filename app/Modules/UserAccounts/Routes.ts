@@ -16,7 +16,7 @@ Route.group(() => {
 Route.group(() => {
   Route.get('/list', 'List')
   Route.post('/create', 'Create')
-  Route.post('/update', 'Update')
+  Route.put('/update', 'Update')
   Route.delete('/delete', 'Delete')
 })
   .prefix('/api/v1/administration/user-accounts')
