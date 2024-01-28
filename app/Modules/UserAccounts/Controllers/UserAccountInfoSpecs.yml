@@ -1,19 +1,12 @@
-/api/v1/administration/departements/delete:
-  delete:
+/api/v1/account/info:
+  get:
     tags:
-      - Departements
+      - User Account
     security: []
-    summary: Delete Clients
-    description: Delete New Clients in All Companies
-    requestBody:
-      content:
-        application/x-www-form-urlencoded:
-          schema:
-            type: object
-            properties:
-              departementCode:
-                $ref: '#/definitions/generals/string'
-
+    summary: User Account Info
+    description: Get Full User Account Info
+    parameters:
+      - $ref: '#/parameters/userCode'
     responses:
       '200':
         description: Success
@@ -25,7 +18,7 @@
                 status:
                   $ref: '#/responses/codes/200'
                 message:
-                  $ref: '#/responses/messages/success'
+                  $ref: '#/responses/messages/retrieve'
       '4xx':
         description: Bad Request (Input Data Maybe Invalid)
         content:

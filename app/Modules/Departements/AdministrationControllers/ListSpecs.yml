@@ -1,23 +1,10 @@
-/api/v1/administration/departement/list:
+/api/v1/administration/departements/list:
   get:
     tags:
       - Departements
     security: []
     summary: List All Clients
     description: List All New Clients in All Companies
-    requestBody:
-      content:
-        application/x-www-form-urlencoded:
-          schema:
-            type: object
-            properties:
-              code:
-                $ref: '#/definitions/generals/string'
-              name:
-                $ref: '#/definitions/generals/string'
-              subscriptionCode:
-                $ref: '#/definitions/generals/string'
-
     responses:
       '200':
         description: Success
@@ -35,7 +22,7 @@
                   properties:
                     items:
                       type: array
-                      items: 
+                      items:
                         type: object
                         properties:
                           code:

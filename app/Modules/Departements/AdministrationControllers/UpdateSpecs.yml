@@ -1,4 +1,4 @@
-/api/v1/administration/departement/update:
+/api/v1/administration/departements/update:
   put:
     tags:
       - Departements
@@ -15,7 +15,7 @@
                 $ref: '#/definitions/generals/string'
               name:
                 $ref: '#/definitions/generals/string'
-              subscriptionCode:
+              description:
                 $ref: '#/definitions/generals/string'
 
     responses:

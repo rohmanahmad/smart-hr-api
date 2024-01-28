@@ -5,21 +5,6 @@
     security: []
     summary: List All Company
     description: List All New Company in All Companies
-    requestBody:
-      content:
-        application/x-www-form-urlencoded:
-          schema:
-            type: object
-            properties:
-              CompanyCode:
-                $ref: '#/definitions/generals/string'
-              companyCode:
-                $ref: '#/definitions/generals/string'
-              departementCode:
-                $ref: '#/definitions/generals/string'
-              fullname:
-                $ref: '#/definitions/generals/string'
-
     responses:
       '200':
         description: Success
@@ -37,7 +22,7 @@
                   properties:
                     items:
                       type: array
-                      items: 
+                      items:
                         type: object
                         properties:
                           code:

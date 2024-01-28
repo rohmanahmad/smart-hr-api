@@ -11,22 +11,22 @@
           schema:
             type: object
             properties:
-              userCode:
+              code:
                 $ref: '#/definitions/generals/string'
-              companyCode:
+              name:
                 $ref: '#/definitions/generals/string'
-              departementCode:
+              description:
                 $ref: '#/definitions/generals/string'
-              profileCode:
+              address:
                 $ref: '#/definitions/generals/string'
-              employmentStatus:
-                $ref: '#/definitions/user_defined/employment_status'
-              salary:
-                $ref: '#/definitions/generals/number'
-              jobPosition:
+              phoneNumber1:
                 $ref: '#/definitions/generals/string'
-              hireDate:
-                $ref: '#/definitions/generals/date'
+              phoneNumber2:
+                $ref: '#/definitions/generals/string'
+              email:
+                $ref: '#/definitions/generals/string'
+              website:
+                $ref: '#/definitions/generals/password'
 
     responses:
       '200':

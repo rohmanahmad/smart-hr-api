@@ -10,8 +10,8 @@ Route.group(() => {
 Route.group(() => {
   Route.get('/list', 'List')
   Route.post('/create', 'Create')
-  Route.post('/update', 'Update')
-  Route.post('/delete', 'Delete')
+  Route.put('/update', 'Update')
+  Route.delete('/delete', 'Delete')
 })
   .prefix('/api/v1/administration/client')
   .namespace('App/Modules/Clients/AdministrationControllers')

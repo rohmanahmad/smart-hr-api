@@ -14,7 +14,7 @@ type RollbackData = {
 }
 
 export default class UserAccountRegistrationController {
-  public async handle({ request, response, auth }: HttpContextContract) {
+  public async handle({ request, response }: HttpContextContract) {
     try {
       const { email, firstName, lastName, username, companyName, password, confirmPassword } =
         request.body()

@@ -87,6 +87,8 @@ export default class ClientServie {
     try {
       Logger.info('Deleting Client: %o', { clientCode })
       const data = await ClientModel.findByOrFail('code', clientCode)
+      if (!data) throw new Error('cannot find code')
+
       await data.delete()
     } catch (err) {
       throw err
@@ -123,6 +125,29 @@ export default class ClientServie {
       q.updatedAt = DateTimeNowISO()
       await q.save()
       return true
+    } catch (err) {
+      throw err
+    }
+  }
+
+  public async clientAdminList() {
+    const q = await ClientModel.all()
+    const data = q.map((x) => x.toJSON())
+    return data
+  }
+
+  public async createClient({ subscriptionCode }): Promise<ClientCode> {
+    try {
+      Logger.info('create new client')
+      const data: ClientsInterface = {
+        code: await this.getRandomCode(),
+        name: this.getRandomName(),
+        subscriptionCode,
+        createdAt: DateTimeNowISO(),
+      }
+      const res = await ClientModel.create(data)
+      const clientCode: string = res.toJSON().code
+      return clientCode
     } catch (err) {
       throw err
     }
