@@ -81,4 +81,14 @@ export default class EmployeeService {
       throw err
     }
   }
+  
+  public async getEmployeeInfo(code: EmployeesInterface['code']): Promise<object> {
+    try {
+      const q = await EmployeesModel.findBy('code', code)
+      const data = q?.toJSON()
+      return data || {}
+    } catch (err) {
+      throw err
+    }
+  }
 }

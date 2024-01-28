@@ -5,6 +5,8 @@
     security: []
     summary: Employee Info
     description: Get Full Employee Info
+    parameters:
+      - $ref: '#/parameters/EmployeeCode'
     responses:
       '200':
         description: Success
