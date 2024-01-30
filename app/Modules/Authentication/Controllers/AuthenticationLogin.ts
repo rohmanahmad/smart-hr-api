@@ -58,7 +58,7 @@ export default class AuthenticationLoginController {
         us.validateStatus(data.status)
       }
       const passwordFromDB = data?.password
-      if (!(await Hash.use('md5').verify(passwordFromDB, password)))
+      if (!(await Hash.verify(passwordFromDB, password)))
         throw new Error('Invalid Username Or password')
       return data
     } catch (err) {

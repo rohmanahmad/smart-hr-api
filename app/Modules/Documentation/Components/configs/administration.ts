@@ -19,7 +19,7 @@ const config = {
 
   apis: [
     'app/Modules/Documentation/*.yml',
-    'app/Modules/Authentication/AdministrationControllers/*Specs.yml',
+    'app/Modules/Authentication/AdministrationControllers/*.yml',
     'app/Modules/UserAccounts/AdministrationControllers/ListSpecs.yml',
     'app/Modules/UserAccounts/AdministrationControllers/CreateSpecs.yml',
     'app/Modules/UserAccounts/AdministrationControllers/UpdateSpecs.yml',

@@ -1,0 +1,41 @@
+/api/v1/auth/administration/login:
+  post:
+    tags:
+      - Authentication Admin
+    security: []
+    summary: Login Account
+    description: Login Account To Retrieve Token Auth For Authorization
+    requestBody:
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              userAdmin:
+                $ref: '#/definitions/generals/string'
+              password:
+                $ref: '#/definitions/generals/password'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  $ref: '#/responses/codes/200'
+                message:
+                  $ref: '#/responses/messages/retrieve'
+      '4xx':
+        description: Bad Request (Input Data Maybe Invalid)
+        content:
+          application/json:
+            schema:
+              $ref: '#/responses/4xx'
+      '500':
+        description: Error From Internal
+        content:
+          application/json:
+            schema:
+              $ref: '#/responses/5xx'

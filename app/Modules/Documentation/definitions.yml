@@ -38,3 +38,17 @@ definitions:
         - 'intern'
         - 'part-time'
         - 'volunteer'
+    type:
+      type: string
+      enum:
+        - 'clock-in'
+        - 'clock_out'
+    time:
+      type: 'string'
+      example: 01:30:59
+    status:
+      type: 'string'
+      enum:
+        - approved
+        - rejected
+        - pending
